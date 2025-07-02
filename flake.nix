@@ -1,5 +1,5 @@
 {
-  description = "A collection of custom Nix packages";
+  description = "A collection of custom Nix packages/modules/overlays/treats";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -11,6 +11,7 @@
 
   outputs =
     {
+      self,
       fenix,
       nixpkgs,
       ...
@@ -25,27 +26,41 @@
       ];
       forAllSystems = lib.genAttrs allSystems;
       pkgsBySystem = forAllSystems (system: import nixpkgs { inherit system; });
+      genModules =
+        packages: type:
+        lib.genAttrs packages (
+          package:
+          { lib, pkgs, ... }:
+          {
+            imports = [ ./${package}/${type}-module.nix ];
+            programs.${package}.package =
+              lib.mkDefault
+                self.packages.${pkgs.stdenv.hostPlatform.system}.${package};
+          }
+        );
+      genAllModules = genModules [
+        "goclacker"
+        "msedit"
+      ];
     in
     {
-      overlays = {
-        default = final: prev: {
-          msedit = final.callPackage ./msedit/package.nix {
-            fenix = import fenix {
-              pkgs = prev;
-            };
-          };
-          goclacker = final.callPackage ./goclacker/package.nix { };
-        };
-      };
       packages = forAllSystems (
         system:
         let
           pkgs = pkgsBySystem.${system};
         in
         {
-          msedit = pkgs.callPackage ./msedit/package.nix { fenix = fenix.packages.${system}; };
           goclacker = pkgs.callPackage ./goclacker/package.nix { };
+          msedit = pkgs.callPackage ./msedit/package.nix { fenix = fenix.packages.${system}; };
         }
       );
+      nixosModules = genAllModules "nixos";
+      homeModules = genAllModules "home";
+      overlays = {
+        default =
+          final: prev: with self.packages.${prev.stdenv.hostPlatform.system}; {
+            inherit goclacker msedit;
+          };
+      };
     };
 }
