@@ -38,10 +38,7 @@
                 self.packages.${pkgs.stdenv.hostPlatform.system}.${package};
           }
         );
-      genAllModules = genModules [
-        "goclacker"
-        "msedit"
-      ];
+      genAllModules = genModules (lib.attrNames (lib.mergeAttrsList (lib.attrValues self.packages)));
     in
     {
       packages = forAllSystems (
@@ -55,12 +52,14 @@
         }
       );
       nixosModules = genAllModules "nixos";
-      homeModules = genAllModules "home";
+      homeModules = genAllModules "home" // {
+        default = {
+          imports = lib.attrValues self.homeModules;
+        };
+      };
       overlays = {
-        default =
-          final: prev: with self.packages.${prev.stdenv.hostPlatform.system}; {
-            inherit goclacker msedit;
-          };
+        all = final: prev: self.packages.${prev.stdenv.hostPlatform.system};
+        default = self.overlays.all;
       };
     };
 }
