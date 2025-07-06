@@ -38,7 +38,11 @@
                 self.packages.${pkgs.stdenv.hostPlatform.system}.${package};
           }
         );
-      genAllModules = genModules (lib.attrNames (lib.mergeAttrsList (lib.attrValues self.packages)));
+      # genAllModules = genModules (lib.attrNames (lib.mergeAttrsList (lib.attrValues self.packages)));
+      genAllModules = genModules [
+        "goclacker"
+        "msedit"
+      ];
     in
     {
       packages = forAllSystems (
@@ -51,10 +55,14 @@
           msedit = pkgs.callPackage ./msedit/package.nix { fenix = fenix.packages.${system}; };
         }
       );
-      nixosModules = genAllModules "nixos";
-      homeModules = genAllModules "home" // {
+      nixosModules = (genAllModules "nixos") // {
         default = {
-          imports = lib.attrValues self.homeModules;
+          imports = lib.attrValues (genAllModules "nixos");
+        };
+      };
+      homeModules = (genAllModules "home") // {
+        default = {
+          imports = lib.attrValues (genAllModules "home");
         };
       };
       overlays = {
