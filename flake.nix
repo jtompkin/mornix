@@ -45,6 +45,7 @@
         {
           msedit = pkgs.callPackage ./msedit/package.nix { fenix = fenix.packages.${system}; };
           goclacker = pkgs.callPackage ./goclacker/package.nix { };
+          datasets = pkgs.callPackage ./datasets/package.nix { };
         }
       );
     };
