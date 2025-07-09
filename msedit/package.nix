@@ -5,7 +5,7 @@
   fenix,
 }:
 let
-  toolchain = fenix.default.toolchain;
+  inherit (fenix.default) toolchain;
 in
 (makeRustPlatform {
   cargo = toolchain;
