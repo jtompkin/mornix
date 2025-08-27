@@ -41,6 +41,7 @@
       genAllModules = genModules [
         "goclacker"
         "msedit"
+        "spotify-player-git"
       ];
     in
     {
