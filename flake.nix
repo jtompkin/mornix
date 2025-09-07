@@ -40,6 +40,7 @@
         "goclacker"
         "msedit"
         "bt-dualboot"
+        "waybar-mediaplayer"
       ];
       nixosModules = genAllModules "nixos";
       homeModules = genAllModules "home";
@@ -55,6 +56,7 @@
           datasets = pkgs.callPackage ./datasets/package.nix { };
           msedit = pkgs.callPackage ./msedit/package.nix { fenix = fenix.packages.${system}; };
           bt-dualboot = pkgs.callPackage ./bt-dualboot/package.nix { };
+          waybar-mediaplayer = pkgs.callPackage ./waybar-mediaplayer/package.nix { };
         }
       );
       nixosModules = nixosModules // {
