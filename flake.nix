@@ -39,7 +39,6 @@
       genAllModules = genModules [
         "goclacker"
         "msedit"
-        "spotify-player-git"
         "bt-dualboot"
       ];
       nixosModules = genAllModules "nixos";
@@ -56,17 +55,6 @@
           datasets = pkgs.callPackage ./datasets/package.nix { };
           msedit = pkgs.callPackage ./msedit/package.nix { fenix = fenix.packages.${system}; };
           bt-dualboot = pkgs.callPackage ./bt-dualboot/package.nix { };
-          # Remove once updated in nixpkgs
-          spotify-player-git = pkgs.callPackage ./spotify-player-git/package.nix { };
-          mykallisto = pkgs.kallisto.overrideAttrs (oldAttrs: {
-            version = "0.44.0";
-            src = pkgs.fetchFromGitHub {
-              repo = "kallisto";
-              owner = "pachterlab";
-              rev = "v0.44.0";
-              sha256 = "sha256-4q3XGrS0kp6cQVs8zQxsLN55M9O7T/27VR/WJwMGStU=";
-            };
-          });
         }
       );
       nixosModules = nixosModules // {
