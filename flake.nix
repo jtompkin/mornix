@@ -68,5 +68,12 @@
         all = final: prev: self.packages.${prev.stdenv.hostPlatform.system};
         default = self.overlays.all;
       };
+      formatter = forAllSystems (system: pkgs: pkgs.nixfmt-tree);
+      templates = {
+        standard = {
+          path = ./standard;
+          description = "Bog standard flake";
+        };
+      };
     };
 }
