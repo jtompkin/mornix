@@ -71,7 +71,7 @@
       formatter = forAllSystems (system: pkgs: pkgs.nixfmt-tree);
       templates = {
         standard = {
-          path = ./standard;
+          path = ./templates/standard;
           description = "Bog standard flake";
         };
       };
