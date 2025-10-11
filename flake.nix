@@ -74,6 +74,10 @@
           path = ./templates/standard;
           description = "Bog standard flake";
         };
+        python = {
+          path = ./templates/python;
+          description = "Basic Python project";
+        };
       };
     };
 }
