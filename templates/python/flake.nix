@@ -15,8 +15,8 @@
     {
       packages = forAllSystems (
         system: pkgs: {
-          python-program = pkgs.callPackage ./nix/package.nix { };
-          default = self.packages.${system}.python-program;
+          project_name = pkgs.callPackage ./nix/package.nix { };
+          default = self.packages.${system}.project_name;
         }
       );
       devShells = forAllSystems (
