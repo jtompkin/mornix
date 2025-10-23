@@ -78,6 +78,7 @@
           path = ./templates/python;
           description = "Basic Python project";
         };
+        default = self.templates.standard;
       };
     };
 }
