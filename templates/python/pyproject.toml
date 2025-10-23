@@ -6,7 +6,7 @@ dependencies = [
 ]
 
 [project.scripts]
-program_name = "project_name:main"
+project_name = "project_name:main"
 
 [build-system]
 requires = ["setuptools"]
