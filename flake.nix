@@ -52,6 +52,11 @@
           msedit = pkgs.callPackage ./msedit/package.nix { fenix = fenix.packages.${system}; };
           bt-dualboot = pkgs.callPackage ./bt-dualboot/package.nix { };
           waybar-mediaplayer = pkgs.callPackage ./waybar-mediaplayer/package.nix { };
+          vimPlugins = {
+            cmp-mini-snippets = pkgs.callPackage ./vimPlugins/cmp-mini-snippets/package.nix {
+              inherit (pkgs.vimUtils) buildVimPlugin;
+            };
+          };
         }
       );
       nixosModules = nixosModules // {
