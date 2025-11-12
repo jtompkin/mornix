@@ -1,9 +1,9 @@
 {
-  buildVimPlugin,
   fetchFromGitHub,
   vimPlugins,
+  vimUtils,
 }:
-buildVimPlugin {
+vimUtils.buildVimPlugin {
   pname = "cmp-mini-snippets";
   version = "2025-01-26";
   src = fetchFromGitHub {

@@ -42,7 +42,16 @@
         "waybar-mediaplayer"
       ];
       nixosModules = genAllModules "nixos";
-      homeModules = genAllModules "home";
+      homeModules = (genAllModules "home") // {
+        vimPlugins =
+          { lib, pkgs, ... }:
+          {
+            imports = [ ./vimPlugins/home-module.nix ];
+            config.mornix.programs.vimPlugins = lib.mapAttrs (_: package: {
+              inherit package;
+            }) self.packages.${pkgs.stdenv.hostPlatform.system}.vimPlugins;
+          };
+      };
     in
     {
       packages = forAllSystems (
@@ -53,9 +62,7 @@
           bt-dualboot = pkgs.callPackage ./bt-dualboot/package.nix { };
           waybar-mediaplayer = pkgs.callPackage ./waybar-mediaplayer/package.nix { };
           vimPlugins = {
-            cmp-mini-snippets = pkgs.callPackage ./vimPlugins/cmp-mini-snippets/package.nix {
-              inherit (pkgs.vimUtils) buildVimPlugin;
-            };
+            cmp-mini-snippets = pkgs.callPackage ./vimPlugins/cmp-mini-snippets/package.nix { };
           };
         }
       );
