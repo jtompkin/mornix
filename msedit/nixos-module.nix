@@ -5,17 +5,14 @@
   ...
 }:
 let
-  inherit (lib) mkIf mkEnableOption mkPackageOption;
-  cfg = config.programs.msedit;
+  cfg = config.mornix.programs.msedit;
 in
 {
-  options = {
-    programs.msedit = {
-      enable = mkEnableOption "msedit, a simple editor for simple needs";
-      package = mkPackageOption pkgs "msedit" { };
-    };
+  options.mornix.programs.msedit = {
+    enable = lib.mkEnableOption "msedit, a simple editor for simple needs";
+    package = lib.mkPackageOption pkgs "msedit" { };
   };
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     environment.systemPackages = [ cfg.package ];
   };
 }

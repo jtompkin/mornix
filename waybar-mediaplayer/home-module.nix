@@ -5,17 +5,14 @@
   ...
 }:
 let
-  inherit (lib) mkIf mkEnableOption mkPackageOption;
-  cfg = config.programs.waybar-mediaplayer;
+  cfg = config.mornix.programs.waybar-mediaplayer;
 in
 {
-  options = {
-    programs.waybar-mediaplayer = {
-      enable = mkEnableOption "media player plugin for Waybar";
-      package = mkPackageOption pkgs "waybar-mediaplayer" { };
-    };
+  options.mornix.programs.waybar-mediaplayer = {
+    enable = lib.mkEnableOption "media player plugin for Waybar";
+    package = lib.mkPackageOption pkgs "waybar-mediaplayer" { };
   };
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     home.packages = [ cfg.package ];
   };
 }

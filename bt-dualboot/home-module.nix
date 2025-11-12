@@ -5,17 +5,14 @@
   ...
 }:
 let
-  inherit (lib) mkIf mkEnableOption mkPackageOption;
-  cfg = config.programs.bt-dualboot;
+  cfg = config.mornix.programs.bt-dualboot;
 in
 {
-  options = {
-    programs.bt-dualboot = {
-      enable = mkEnableOption "bt-dualboot dual boot bluetooth fix application";
-      package = mkPackageOption pkgs "bt-dualboot" { };
-    };
+  options.mornix.programs.bt-dualboot = {
+    enable = lib.mkEnableOption "bt-dualboot dual boot bluetooth fix application";
+    package = lib.mkPackageOption pkgs "bt-dualboot" { };
   };
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     home.packages = [ cfg.package ];
   };
 }

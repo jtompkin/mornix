@@ -26,44 +26,47 @@
       ];
       forAllSystems = f: lib.genAttrs allSystems (system: f system nixpkgs.legacyPackages.${system});
       genModules =
-        packages: type:
-        lib.genAttrs packages (
-          package:
+        packageNames: type:
+        lib.genAttrs packageNames (
+          packageName:
           { lib, pkgs, ... }:
           {
-            imports = [ ./${package}/${type}-module.nix ];
-            programs.${package}.package = lib.mkDefault self.packages.${pkgs.system}.${package};
+            imports = [ ./${packageName}/${type}-module.nix ];
+            config.mornix.programs.${packageName}.package =
+              lib.mkDefault
+                self.packages.${pkgs.stdenv.hostPlatform.system}.${packageName};
           }
         );
-      genAllModules = genModules [
-        "goclacker"
-        "msedit"
-        "bt-dualboot"
-        "waybar-mediaplayer"
-      ];
-      nixosModules = genAllModules "nixos";
-      homeModules = (genAllModules "home") // {
-        vimPlugins =
-          { lib, pkgs, ... }:
-          {
-            imports = [ ./vimPlugins/home-module.nix ];
-            config.mornix.programs.vimPlugins = lib.mapAttrs (_: package: {
-              inherit package;
-            }) self.packages.${pkgs.stdenv.hostPlatform.system}.vimPlugins;
-          };
-      };
+      nixosModules = genModules [ "msedit" "goclacker" ] "nixos";
+      homeModules =
+        (genModules [
+          "bt-dualboot"
+          "goclacker"
+          "msedit"
+          "waybar-mediaplayer"
+        ] "home")
+        // {
+          vimPlugins =
+            { lib, pkgs, ... }:
+            {
+              imports = [ ./vimPlugins/home-module.nix ];
+              config.mornix.programs.vimPlugins = lib.mapAttrs (_: package: {
+                package = lib.mkDefault package;
+              }) self.packages.${pkgs.stdenv.hostPlatform.system}.vimPlugins;
+            };
+        };
     in
     {
       packages = forAllSystems (
         system: pkgs: {
-          goclacker = pkgs.callPackage ./goclacker/package.nix { };
-          datasets = pkgs.callPackage ./datasets/package.nix { };
-          msedit = pkgs.callPackage ./msedit/package.nix { fenix = fenix.packages.${system}; };
           bt-dualboot = pkgs.callPackage ./bt-dualboot/package.nix { };
-          waybar-mediaplayer = pkgs.callPackage ./waybar-mediaplayer/package.nix { };
+          datasets = pkgs.callPackage ./datasets/package.nix { };
+          goclacker = pkgs.callPackage ./goclacker/package.nix { };
+          msedit = pkgs.callPackage ./msedit/package.nix { fenix = fenix.packages.${system}; };
           vimPlugins = {
             cmp-mini-snippets = pkgs.callPackage ./vimPlugins/cmp-mini-snippets/package.nix { };
           };
+          waybar-mediaplayer = pkgs.callPackage ./waybar-mediaplayer/package.nix { };
         }
       );
       nixosModules = nixosModules // {

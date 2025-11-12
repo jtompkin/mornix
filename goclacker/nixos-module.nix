@@ -5,17 +5,14 @@
   ...
 }:
 let
-  inherit (lib) mkIf mkEnableOption mkPackageOption;
-  cfg = config.programs.goclacker;
+  cfg = config.mornix.programs.goclacker;
 in
 {
-  options = {
-    programs.goclacker = {
-      enable = mkEnableOption "goclacker RPN calculator";
-      package = mkPackageOption pkgs "goclacker" { };
-    };
+  options.mornix.programs.goclacker = {
+    enable = lib.mkEnableOption "goclacker RPN calculator";
+    package = lib.mkPackageOption pkgs "goclacker" { };
   };
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     environment.systemPackages = [ cfg.package ];
   };
 }
