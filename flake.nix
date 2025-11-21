@@ -44,6 +44,7 @@
           "goclacker"
           "msedit"
           "waybar-mediaplayer"
+          "plotprimes"
         ] "home")
         // {
           vimPlugins =
@@ -63,6 +64,7 @@
           datasets = pkgs.callPackage ./datasets/package.nix { };
           goclacker = pkgs.callPackage ./goclacker/package.nix { };
           msedit = pkgs.callPackage ./msedit/package.nix { fenix = fenix.packages.${system}; };
+          plotprimes = pkgs.callPackage ./plotprimes/package.nix { };
           vimPlugins = {
             cmp-mini-snippets = pkgs.callPackage ./vimPlugins/cmp-mini-snippets/package.nix { };
           };
