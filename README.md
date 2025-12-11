@@ -47,8 +47,8 @@ The goal here is to utilize the module system to limit or remove the need to use
 
 - **Provided for all plugins**: Nix package, Home Manager module
 - **[cmp-mini-snippets](https://github.com/abeldekat/cmp-mini-snippets)**
-  - **Reason for inclusion**: mot available in Nixpkgs
- 
+  - **Reason for inclusion**: not available in Nixpkgs
+
 ### Templates!
 
 - **standard**: bog standard flake
@@ -60,35 +60,41 @@ Most packages provide at least a minimal Home Manager and/or NixOS module that d
 
 ## Usage
 
-Add the flake to you inputs, and then import the default module to get all the modules. You can import specific modules too.
+Add the flake to your inputs, and then import the default module to get all the modules. You can import specific modules too.
 
 ```nix
 {
   inputs = {
     home-manager.url = "...";
     mornix.url = "github:jtompkin/mornix/main";
-  }
+  };
   outputs =
     {
       self,
       mornix,
-      home-manager
+      home-manager,
     }:
     {
       homeConfigurations."chrundle@paddys" = home-manager.lib.homeManagerConfiguration {
         pkgs = "...";
         modules = [
-          ({ config, pkgs, lib }:
-          {
-            imports = [ mornix.homeModules.default ]; # or just: mornix.homeModules.goclacker
-            config = {
-              mornix.programs.goclacker.enable = true;
-              # Replace the package with your own
-              #mornix.programs.goclacker.package = pkgs.callPackage ./custom/package.nix { };
-              # Grab the package from the config
-              #some.made.up.option = lib.getExe config.mornix.programs.goclacker.package;
-            };
-          })
+          (
+            {
+              config,
+              pkgs,
+              lib,
+            }:
+            {
+              imports = [ mornix.homeModules.default ]; # or just: mornix.homeModules.goclacker
+              config = {
+                mornix.programs.goclacker.enable = true;
+                # Replace the package with your own
+                #mornix.programs.goclacker.package = pkgs.callPackage ./custom/package.nix { };
+                # Grab the package from the config
+                #some.made.up.option = lib.getExe config.mornix.programs.goclacker.package;
+              };
+            }
+          )
         ];
       };
     };
