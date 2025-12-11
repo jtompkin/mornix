@@ -1,8 +1,10 @@
 /*
-  Parts of build recipe stolen fron: https://github.com/peterldowns/nix-search-cli/blob/main/flake.nix
-  See LICENSE file in this directory
-  This is copied here so as to not require their flake as another input,
-  but still provide the package for a Home Manager module.
+  Parts of build recipe stolen from: https://github.com/peterldowns/nix-search-cli/blob/main/flake.nix
+  See LICENSE file in this directory.
+  The recipe is copied here with modifications so as to not require their flake as
+  another input, but still provide the package for the Home Manager module.
+  All other code in this directory is licensed under the LICENSE file in the root
+  directory of this repository (https://github.com/jtompkin/mornix).
 */
 {
   buildGoModule,
