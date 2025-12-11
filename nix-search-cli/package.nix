@@ -22,9 +22,9 @@ buildGoModule (finalAttrs: {
   GOWORK = "off";
   modRoot = ".";
   subPackages = [ "cmd/nix-search" ];
-  ldFlags = [
+  ldflags = [
     "-X main.Version=${lib.fileContents "${finalAttrs.src}/VERSION"}"
-    "-X main.Commit=${finalAttrs.src.rev}"
+    "-X main.Commit=${builtins.substring 0 7 finalAttrs.src.rev}"
   ];
   doCheck = false;
 })
