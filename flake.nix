@@ -43,8 +43,9 @@
           "bt-dualboot"
           "goclacker"
           "msedit"
-          "waybar-mediaplayer"
+          "nix-search-cli"
           "plotprimes"
+          "waybar-mediaplayer"
         ] "home")
         // {
           vimPlugins =
@@ -64,6 +65,7 @@
           datasets = pkgs.callPackage ./datasets/package.nix { };
           goclacker = pkgs.callPackage ./goclacker/package.nix { };
           msedit = pkgs.callPackage ./msedit/package.nix { fenix = fenix.packages.${system}; };
+          nix-search-cli = pkgs.callPackage ./nix-search-cli/package.nix { };
           plotprimes = pkgs.callPackage ./plotprimes/package.nix { };
           vimPlugins = {
             cmp-mini-snippets = pkgs.callPackage ./vimPlugins/cmp-mini-snippets/package.nix { };
