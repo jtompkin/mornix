@@ -70,6 +70,12 @@
           vimPlugins = {
             cmp-mini-snippets = pkgs.callPackage ./vimPlugins/cmp-mini-snippets/package.nix { };
           };
+          zshPlugins = {
+            zimfw-completion = pkgs.callPackage ./zshPlugins/zimfw-completion/package.nix { };
+            zimfw-termtitle = pkgs.callPackage ./zshPlugins/zimfw-termtitle/package.nix { };
+            zimfw-environment = pkgs.callPackage ./zshPlugins/zimfw-environment/package.nix { };
+            zimfw-input = pkgs.callPackage ./zshPlugins/zimfw-input/package.nix { };
+          };
           waybar-mediaplayer = pkgs.callPackage ./waybar-mediaplayer/package.nix { };
         }
       );
