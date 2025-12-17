@@ -3,16 +3,11 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    fenix = {
-      url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
     {
       self,
-      fenix,
       nixpkgs,
       ...
     }:
@@ -37,12 +32,11 @@
                 self.packages.${pkgs.stdenv.hostPlatform.system}.${packageName};
           }
         );
-      nixosModules = genModules [ "msedit" "goclacker" ] "nixos";
+      nixosModules = genModules [ "goclacker" ] "nixos";
       homeModules =
         (genModules [
           "bt-dualboot"
           "goclacker"
-          "msedit"
           "nix-search-cli"
           "plotprimes"
           "waybar-mediaplayer"
@@ -64,7 +58,6 @@
           bt-dualboot = pkgs.callPackage ./bt-dualboot/package.nix { };
           datasets = pkgs.callPackage ./datasets/package.nix { };
           goclacker = pkgs.callPackage ./goclacker/package.nix { };
-          msedit = pkgs.callPackage ./msedit/package.nix { fenix = fenix.packages.${system}; };
           nix-search-cli = pkgs.callPackage ./nix-search-cli/package.nix { };
           plotprimes = pkgs.callPackage ./plotprimes/package.nix { };
           vimPlugins = {

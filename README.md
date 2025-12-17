@@ -26,7 +26,8 @@ The goal here is to utilize the module system to limit or remove the need to use
 ### [edit (msedit)](https://github.com/microsoft/edit): command line editor by Microsoft
 
 - **Reason for inclusion**: learning, used to not be available in Nixpkgs
-- **Provided**: Nix package, Home Manager module, NixOS module
+- **Provided**: Nix package recipe
+- **REMOVED**: No longer included in flake to trim inputs; recipe still available in `package.nix`
 
 ### [nix-search-cli](https://github.com/peterldowns/nix-search-cli): CLI for searching packages on search.nixos.org
 
