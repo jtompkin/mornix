@@ -61,24 +61,32 @@
         };
     in
     {
-      packages = forAllSystems (
+      # Package sets go in here. They will be merged into `packages` at the top level.
+      legacyPackages = forAllSystems (
         system: pkgs: {
-          bt-dualboot = pkgs.callPackage ./bt-dualboot/package.nix { };
-          datasets = pkgs.callPackage ./datasets/package.nix { };
-          goclacker = pkgs.callPackage ./goclacker/package.nix { };
-          nix-search-cli = pkgs.callPackage ./nix-search-cli/package.nix { };
-          plotprimes = pkgs.callPackage ./plotprimes/package.nix { };
-          vimPlugins = {
+          vimPlugins = lib.recurseIntoAttrs {
             cmp-mini-snippets = pkgs.callPackage ./vimPlugins/cmp-mini-snippets/package.nix { };
           };
-          zshPlugins = {
+          zshPlugins = lib.recurseIntoAttrs {
             zimfw-completion = pkgs.callPackage ./zshPlugins/zimfw-completion/package.nix { };
             zimfw-termtitle = pkgs.callPackage ./zshPlugins/zimfw-termtitle/package.nix { };
             zimfw-environment = pkgs.callPackage ./zshPlugins/zimfw-environment/package.nix { };
             zimfw-input = pkgs.callPackage ./zshPlugins/zimfw-input/package.nix { };
           };
+        }
+      );
+      packages = forAllSystems (
+        system: pkgs:
+        {
+          bt-dualboot = pkgs.callPackage ./bt-dualboot/package.nix { };
+          goclacker = pkgs.callPackage ./goclacker/package.nix { };
+          nix-search-cli = pkgs.callPackage ./nix-search-cli/package.nix { };
+          plotprimes = pkgs.callPackage ./plotprimes/package.nix { };
           waybar-mediaplayer = pkgs.callPackage ./waybar-mediaplayer/package.nix { };
         }
+        // (removeAttrs (lib.mergeAttrsList (lib.attrValues self.legacyPackages.${system})) [
+          "recurseForDerivations"
+        ])
       );
       nixosModules = nixosModules // {
         default = {
@@ -106,5 +114,6 @@
         default = self.overlays.all;
       };
       formatter = forAllSystems (system: pkgs: pkgs.nixfmt-tree);
+      checks = forAllSystems (system: pkgs: self.packages.${system});
     };
 }
