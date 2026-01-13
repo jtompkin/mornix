@@ -13,11 +13,6 @@ The goal here is to utilize the module system to limit or remove the need to use
 - **Reason for inclusion**: not available in Nixpkgs
 - **Provided**: Nix package, Home Manager module
 
-### [datasets](https://github.com/ncbi/datasets): gather data from across NCBI databases
-
-- **Reason for inclusion**: not available in Nixpkgs
-- **Provided**: Nix package
-
 ### [goclacker](https://github.com/jtompkin/goclacker): command line reverse Polish notation (RPN) calculator
 
 - **Reason for inclusion**: egotistical bias, not available in Nixpkgs
