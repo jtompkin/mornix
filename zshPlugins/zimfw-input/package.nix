@@ -5,12 +5,12 @@
 }:
 stdenvNoCC.mkDerivation {
   pname = "zimfw-input";
-  version = "2025-12-15";
+  version = "2026-01-05";
   src = fetchFromGitHub {
     owner = "zimfw";
     repo = "input";
-    rev = "da6b1cccac5e56104088acc2d66e181f3317192a";
-    hash = "sha256-QWyQpOxU3+P2+EGTkzt9HdEwhVnBa3yPwv7JA2o5YIQ=";
+    rev = "0f7efb3f659e1d68743a6c2c06c962ba9e05ae66";
+    hash = "sha256-Ng4cVmzOrTk7uiW64QAGCXG2wmN+63mUlRv9x93g/90=";
   };
   installPhase = ''
     mkdir -p $out
