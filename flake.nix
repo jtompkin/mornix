@@ -48,7 +48,7 @@
               imports = [ ./vimPlugins/home-module.nix ];
               config.mornix.programs.vimPlugins = lib.mapAttrs (_: package: {
                 package = lib.mkDefault package;
-              }) self.packages.${pkgs.stdenv.hostPlatform.system}.vimPlugins;
+              }) self.legacyPackages.${pkgs.stdenv.hostPlatform.system}.vimPlugins;
             };
           zshPlugins =
             { lib, pkgs, ... }:
@@ -56,7 +56,7 @@
               imports = [ ./zshPlugins/home-module.nix ];
               config.mornix.programs.zshPlugins = lib.mapAttrs (_: package: {
                 package = lib.mkDefault package;
-              }) self.packages.${pkgs.stdenv.hostPlatform.system}.zshPlugins;
+              }) self.legacyPackages.${pkgs.stdenv.hostPlatform.system}.zshPlugins;
             };
         };
     in
