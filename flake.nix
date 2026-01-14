@@ -19,6 +19,7 @@
         "x86_64-darwin"
         "aarch64-darwin"
       ];
+      removeRecurseHint = attrs: removeAttrs attrs [ "recurseForDerivations" ];
       forAllSystems = f: lib.genAttrs allSystems (system: f system nixpkgs.legacyPackages.${system});
       genModules =
         packageNames: type:
@@ -48,7 +49,7 @@
               imports = [ ./vimPlugins/home-module.nix ];
               config.mornix.programs.vimPlugins = lib.mapAttrs (_: package: {
                 package = lib.mkDefault package;
-              }) self.legacyPackages.${pkgs.stdenv.hostPlatform.system}.vimPlugins;
+              }) (removeRecurseHint self.legacyPackages.${pkgs.stdenv.hostPlatform.system}.vimPlugins);
             };
           zshPlugins =
             { lib, pkgs, ... }:
@@ -56,7 +57,7 @@
               imports = [ ./zshPlugins/home-module.nix ];
               config.mornix.programs.zshPlugins = lib.mapAttrs (_: package: {
                 package = lib.mkDefault package;
-              }) self.legacyPackages.${pkgs.stdenv.hostPlatform.system}.zshPlugins;
+              }) (removeRecurseHint self.legacyPackages.${pkgs.stdenv.hostPlatform.system}.zshPlugins);
             };
         };
     in
@@ -84,9 +85,7 @@
           plotprimes = pkgs.callPackage ./plotprimes/package.nix { };
           waybar-mediaplayer = pkgs.callPackage ./waybar-mediaplayer/package.nix { };
         }
-        // (removeAttrs (lib.mergeAttrsList (lib.attrValues self.legacyPackages.${system})) [
-          "recurseForDerivations"
-        ])
+        // removeRecurseHint (lib.mergeAttrsList (lib.attrValues self.legacyPackages.${system}))
       );
       nixosModules = nixosModules // {
         default = {
