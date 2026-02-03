@@ -17,6 +17,6 @@ rustPlatform.buildRustPackage {
   meta = {
     description = "Synchronize the clipboard across multiple X11 and Wayland instances";
     homepage = "https://github.com/dnut/clipboard-sync";
-    mainProgram = "cliboard-sync";
+    mainProgram = "clipboard-sync";
   };
 }
