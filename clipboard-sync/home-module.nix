@@ -19,13 +19,17 @@ in
   config.home.packages = lib.mkIf programCfg.enable [ programCfg.package ];
   # Stolen from: https://github.com/dnut/clipboard-sync/blob/master/flake.nix
   config.systemd.user.services.clipboard-sync = lib.mkIf serviceCfg.enable {
-    description = "Synchronize clipboards across all displays";
-    documentation = [ "https://github.com/dnut/clipboard-sync/" ];
-    wantedBy = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
-    partOf = [ "graphical-session.target" ];
-    requisite = [ "graphical-session.target" ];
-    serviceConfig = {
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
+    Unit = {
+      Description = "Synchronize cliboards across all displays";
+      Documentation = [ "https://github.com/dnut/clipboard-sync" ];
+      Requisite = [ "graphical-session.target" ];
+      PartOf = [ "graphical-session.target" ];
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
       ExecStart = "/usr/bin/env ${lib.getExe programCfg.package} --hide-timestamp --log-level debug";
       Restart = "on-failure";
     };
