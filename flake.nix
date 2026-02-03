@@ -37,6 +37,7 @@
       homeModules =
         (genModules [
           "bt-dualboot"
+          "clipboard-sync"
           "goclacker"
           "nix-search-cli"
           "plotprimes"
@@ -80,6 +81,7 @@
         system: pkgs:
         {
           bt-dualboot = pkgs.callPackage ./bt-dualboot/package.nix { };
+          clipboard-sync = pkgs.callPackage ./clipboard-sync/package.nix { };
           goclacker = pkgs.callPackage ./goclacker/package.nix { };
           nix-search-cli = pkgs.callPackage ./nix-search-cli/package.nix { };
           plotprimes = pkgs.callPackage ./plotprimes/package.nix { };
