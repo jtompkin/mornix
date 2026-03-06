@@ -64,6 +64,7 @@
     in
     {
       # Package sets go in here. They will be merged into `packages` at the top level.
+      # Do not use nested package sets.
       legacyPackages = forAllSystems (
         system: pkgs: {
           vimPlugins = lib.recurseIntoAttrs {
@@ -86,6 +87,9 @@
           infernal = pkgs.callPackage ./infernal/package.nix { };
           nix-search-cli = pkgs.callPackage ./nix-search-cli/package.nix { };
           plotprimes = pkgs.callPackage ./plotprimes/package.nix { };
+          tRNAscan-se = pkgs.callPackage ./tRNAscan-se/package.nix {
+            inherit (self.packages.${system}) infernal;
+          };
           waybar-mediaplayer = pkgs.callPackage ./waybar-mediaplayer/package.nix { };
         }
         // removeRecurseHint (lib.mergeAttrsList (lib.attrValues self.legacyPackages.${system}))
