@@ -83,6 +83,7 @@
           bt-dualboot = pkgs.callPackage ./bt-dualboot/package.nix { };
           clipboard-sync = pkgs.callPackage ./clipboard-sync/package.nix { };
           goclacker = pkgs.callPackage ./goclacker/package.nix { };
+          infernal = pkgs.callPackage ./infernal/package.nix { };
           nix-search-cli = pkgs.callPackage ./nix-search-cli/package.nix { };
           plotprimes = pkgs.callPackage ./plotprimes/package.nix { };
           waybar-mediaplayer = pkgs.callPackage ./waybar-mediaplayer/package.nix { };
