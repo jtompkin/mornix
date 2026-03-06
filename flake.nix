@@ -41,6 +41,7 @@
           "goclacker"
           "nix-search-cli"
           "plotprimes"
+          "tRNAscan-se"
           "waybar-mediaplayer"
         ] "home")
         // {
