@@ -33,7 +33,7 @@
                 self.packages.${pkgs.stdenv.hostPlatform.system}.${packageName};
           }
         );
-      nixosModules = genModules [ "goclacker" ] "nixos";
+      nixosModules = genModules [ "goclacker" "neuswc" "hevel" ] "nixos";
       homeModules =
         (genModules [
           "bt-dualboot"
@@ -85,7 +85,14 @@
           bt-dualboot = pkgs.callPackage ./bt-dualboot/package.nix { };
           clipboard-sync = pkgs.callPackage ./clipboard-sync/package.nix { };
           goclacker = pkgs.callPackage ./goclacker/package.nix { };
+          hevel = pkgs.callPackage ./hevel/package.nix {
+            inherit (self.packages.${system}) neuswc neuwld;
+          };
           infernal = pkgs.callPackage ./infernal/package.nix { };
+          neuwld = pkgs.callPackage ./neuwld/package.nix { };
+          neuswc = pkgs.callPackage ./neuswc/package.nix {
+            inherit (self.packages.${system}) neuwld;
+          };
           nix-search-cli = pkgs.callPackage ./nix-search-cli/package.nix { };
           plotprimes = pkgs.callPackage ./plotprimes/package.nix { };
           tRNAscan-se = pkgs.callPackage ./tRNAscan-se/package.nix {
