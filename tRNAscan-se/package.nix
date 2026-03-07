@@ -35,6 +35,7 @@ stdenv.mkDerivation (finalAttrs: {
   meta = {
     description = "A program for detection of tRNA genes";
     homepage = "https://github.com/UCSC-LoweLab/tRNAscan-SE";
+    mainProgram = "tRNAscan-SE";
     license = lib.licenses.gpl3;
   };
 })

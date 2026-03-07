@@ -19,6 +19,6 @@ buildGoModule (finalAttrs: {
     changelog = "https://github.com/jtompkin/goclacker/blob/${finalAttrs.src.tag}/CHANGELOG.md";
     platforms = lib.platforms.unix;
     license = lib.licenses.mit;
-    mainProgram = finalAttrs.pname;
+    mainProgram = "goclacker";
   };
 })
