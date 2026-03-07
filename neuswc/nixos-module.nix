@@ -14,11 +14,10 @@ in
   };
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [ cfg.package ];
-    security.wrappers.neuswc = {
+    security.wrappers.swc-launch = {
       setuid = true;
       owner = "root";
       group = "root";
-      program = "swc-launch";
       source = lib.getExe' cfg.package "swc-launch";
     };
   };
