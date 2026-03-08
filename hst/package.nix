@@ -42,7 +42,9 @@ stdenv.mkDerivation (finalAttrs: {
   inherit patches;
 
   configFile = lib.optionalString (conf != null) (writeText "config.def.h" conf);
-  postPatch = lib.optionalString (conf != null) "cp ${finalAttrs.configFile} config.def.h";
+  postPatch = lib.optionalString (conf != null) ''
+    cp ${finalAttrs.configFile} config.def.h
+  '';
 
   nativeBuildInputs = [
     pkg-config

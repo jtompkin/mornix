@@ -62,7 +62,9 @@ stdenv.mkDerivation (finalAttrs: {
       conf
     else
       writeText "config.h" (toString conf);
-  postPatch = lib.optionalString (conf != null) "cp ${finalAttrs.configFile} config.h";
+  postPatch = lib.optionalString (conf != null) ''
+    cp ${finalAttrs.configFile} config.h
+  '';
 
   meta = {
     description = "A scrollable, floating window manager for Wayland";

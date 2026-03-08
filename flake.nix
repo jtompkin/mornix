@@ -39,6 +39,7 @@
           "neuswc"
           "hevel"
           "hst"
+          "shko"
         ] "nixos"
         // {
           allPackages =
@@ -135,6 +136,9 @@
           };
           nix-search-cli = pkgs.callPackage ./nix-search-cli/package.nix { };
           plotprimes = pkgs.callPackage ./plotprimes/package.nix { };
+          shko = pkgs.callPackage ./shko/package.nix {
+            inherit (self.packages.${system}) neuwld neuswc;
+          };
           swall = pkgs.callPackage ./swall/package.nix { };
           swiv = pkgs.callPackage ./swiv/package.nix {
             inherit (self.packages.${system}) neuwld;
