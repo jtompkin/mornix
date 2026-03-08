@@ -61,6 +61,7 @@
           "neumenu"
           "nix-search-cli"
           "plotprimes"
+          "swall"
           "swiv"
           "tRNAscan-se"
           "waybar-mediaplayer"
