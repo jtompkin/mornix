@@ -33,24 +33,35 @@
                 self.packages.${pkgs.stdenv.hostPlatform.system}.${packageName};
           }
         );
-      nixosModules = genModules [ "goclacker" "neuswc" "hevel" ] "nixos" // {
-        allPackages =
-          { lib, pkgs, ... }:
-          {
-            options.mornix.allPrograms = lib.mkOption {
-              type = lib.types.attrsOf lib.types.package;
-              readOnly = true;
-              default = self.packages.${pkgs.stdenv.hostPlatform.system};
+      nixosModules =
+        genModules [
+          "goclacker"
+          "neuswc"
+          "hevel"
+          "hst"
+        ] "nixos"
+        // {
+          allPackages =
+            { lib, pkgs, ... }:
+            {
+              options.mornix.allPrograms = lib.mkOption {
+                type = lib.types.attrsOf lib.types.package;
+                readOnly = true;
+                default = self.packages.${pkgs.stdenv.hostPlatform.system};
+              };
             };
-          };
-      };
+        };
       homeModules =
         (genModules [
           "bt-dualboot"
           "clipboard-sync"
           "goclacker"
+          "hst"
+          "mojito"
+          "neumenu"
           "nix-search-cli"
           "plotprimes"
+          "swiv"
           "tRNAscan-se"
           "waybar-mediaplayer"
         ] "home")
@@ -107,13 +118,26 @@
           hevel = pkgs.callPackage ./hevel/package.nix {
             inherit (self.packages.${system}) neuswc neuwld;
           };
+          hst = pkgs.callPackage ./hst/package.nix {
+            inherit (self.packages.${system}) neuwld;
+          };
           infernal = pkgs.callPackage ./infernal/package.nix { };
+          mojito = pkgs.callPackage ./mojito/package.nix {
+            inherit (self.packages.${system}) neuwld neuswc;
+          };
+          neumenu = pkgs.callPackage ./neumenu/package.nix {
+            inherit (self.packages.${system}) neuwld neuswc;
+          };
           neuwld = pkgs.callPackage ./neuwld/package.nix { };
           neuswc = pkgs.callPackage ./neuswc/package.nix {
             inherit (self.packages.${system}) neuwld;
           };
           nix-search-cli = pkgs.callPackage ./nix-search-cli/package.nix { };
           plotprimes = pkgs.callPackage ./plotprimes/package.nix { };
+          swall = pkgs.callPackage ./swall/package.nix { };
+          swiv = pkgs.callPackage ./swiv/package.nix {
+            inherit (self.packages.${system}) neuwld;
+          };
           tRNAscan-se = pkgs.callPackage ./tRNAscan-se/package.nix {
             inherit (self.packages.${system}) infernal;
           };
