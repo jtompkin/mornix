@@ -33,7 +33,17 @@
                 self.packages.${pkgs.stdenv.hostPlatform.system}.${packageName};
           }
         );
-      nixosModules = genModules [ "goclacker" "neuswc" "hevel" ] "nixos";
+      nixosModules = genModules [ "goclacker" "neuswc" "hevel" ] "nixos" // {
+        allPackages =
+          { lib, pkgs, ... }:
+          {
+            options.mornix.allPrograms = lib.mkOption {
+              type = lib.types.attrsOf lib.types.package;
+              readOnly = true;
+              default = self.packages.${pkgs.stdenv.hostPlatform.system};
+            };
+          };
+      };
       homeModules =
         (genModules [
           "bt-dualboot"
@@ -60,6 +70,15 @@
               config.mornix.programs.zshPlugins = lib.mapAttrs (_: package: {
                 package = lib.mkDefault package;
               }) (removeRecurseHint self.legacyPackages.${pkgs.stdenv.hostPlatform.system}.zshPlugins);
+            };
+          allPackages =
+            { lib, pkgs, ... }:
+            {
+              options.mornix.allPackages = lib.mkOption {
+                type = lib.types.attrsOf lib.types.package;
+                readOnly = true;
+                default = self.packages.${pkgs.stdenv.hostPlatform.system};
+              };
             };
         };
     in
