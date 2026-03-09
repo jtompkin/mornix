@@ -147,6 +147,9 @@
             inherit (self.packages.${system}) infernal;
           };
           waybar-mediaplayer = pkgs.callPackage ./waybar-mediaplayer/package.nix { };
+          wsxwm = pkgs.callPackage ./wsxwm/package.nix {
+            inherit (self.packages.${system}) neuwld neuswc;
+          };
         }
         // removeRecurseHint (lib.mergeAttrsList (lib.attrValues self.legacyPackages.${system}))
       );
