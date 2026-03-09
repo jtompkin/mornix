@@ -2,7 +2,7 @@
 
 A collection of custom Nix packages/modules/overlays/treats.
 
-The goal here is to utilize the module system to limit or remove the need to use overlays to install custom software and different versions of software. By providing a module for each package, you can specify the specific version of each package to use in the `package` config option. Then, you can reference this package throughout the rest of your Nix config. This is much cleaner than overlays, which are gross.
+The goal here is to utilize the module system to limit or remove the need to use overlays to install custom software and different versions of software. By providing a module for each package, you can specify the specific version of each package to use in the `package`  or `finalPackage` config option. Then, you can reference this package throughout the rest of your Nix config. This is much cleaner than overlays, which are gross.
 
 ## What's inside?
 
@@ -52,7 +52,7 @@ The goal here is to utilize the module system to limit or remove the need to use
 
 ### Modules!
 
-Most packages provide at least a minimal Home Manager and/or NixOS module that defines an `enable` option and a `package` option in the `mornix.programs` namespace. The `package` option is set by default to the corresponding package built by this flake, but can of course be overridden. Usually, the enable option will just add the package to your home or system packages list.
+Most packages provide at least a minimal Home Manager and/or NixOS module that defines an `enable` option and a `package` option in the `mornix.programs` namespace. The `package` option is set by default to the corresponding package built by this flake, but can of course be overridden. Some modules use `finalPackage` for, well, the final package so you can use `package.override` to set the `finalPackage`. It's just that easy! Usually, the enable option will just add the package to your home or system packages list.
 
 ## Usage
 
