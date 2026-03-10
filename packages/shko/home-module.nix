@@ -20,6 +20,6 @@ in
     };
   };
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ cfg.finalPackage ];
+    home.packages = [ cfg.finalPackage ];
   };
 }

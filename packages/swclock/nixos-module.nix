@@ -4,19 +4,19 @@
   ...
 }:
 let
-  cfg = config.mornix.programs.shko;
+  cfg = config.mornix.programs.swclock;
 in
 {
-  options.mornix.programs.shko = {
-    enable = lib.mkEnableOption "shko: Keyboard-oriented, floating, zomming, scrolling window manager";
+  options.mornix.programs.swclock = {
+    enable = lib.mkEnableOption "swclock: Clock program for Wayland";
     package = lib.mkOption {
       type = lib.types.package;
-      description = "The shko package to use";
+      description = "The swclock package to use";
     };
     finalPackage = lib.mkOption {
       type = lib.types.package;
       default = cfg.package;
-      description = "The shko package that is used in the config";
+      description = "The swclock package that is used in the config";
     };
   };
   config = lib.mkIf cfg.enable {

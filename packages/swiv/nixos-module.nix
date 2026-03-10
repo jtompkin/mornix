@@ -4,19 +4,19 @@
   ...
 }:
 let
-  cfg = config.mornix.programs.shko;
+  cfg = config.mornix.programs.swiv;
 in
 {
-  options.mornix.programs.shko = {
-    enable = lib.mkEnableOption "shko: Keyboard-oriented, floating, zomming, scrolling window manager";
+  options.mornix.programs.swiv = {
+    enable = lib.mkEnableOption "swiv: Simple wayland image viewer";
     package = lib.mkOption {
       type = lib.types.package;
-      description = "The shko package to use";
+      description = "The swiv package to use";
     };
     finalPackage = lib.mkOption {
       type = lib.types.package;
       default = cfg.package;
-      description = "The shko package that is used in the config";
+      description = "The swiv package that is used in the config";
     };
   };
   config = lib.mkIf cfg.enable {
