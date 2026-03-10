@@ -134,6 +134,7 @@
           plotprimes = { };
           shko = { inherit (self.packages.${system}) neuwld neuswc; };
           swall = { };
+          swclock = { inherit (self.packages.${system}) neuwld; };
           swiv = { inherit (self.packages.${system}) neuwld; };
           tRNAscan-se = { inherit (self.packages.${system}) infernal; };
           waybar-mediaplayer = { };
