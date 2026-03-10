@@ -19,28 +19,31 @@
         "x86_64-darwin"
         "aarch64-darwin"
       ];
-      removeRecurseHint = attrs: removeAttrs attrs [ "recurseForDerivations" ];
       forAllSystems = f: lib.genAttrs allSystems (system: f system nixpkgs.legacyPackages.${system});
+      removeRecurseHint = attrs: removeAttrs attrs [ "recurseForDerivations" ];
+      getPackageDrv =
+        pkgs: pkgSet: pkgName: args:
+        pkgs.callPackage ./packages/${pkgSet}/${pkgName}/package.nix args;
       genModules =
-        packageNames: type:
+        pkgSet: type: packageNames:
         lib.genAttrs packageNames (
           packageName:
           { lib, pkgs, ... }:
           {
-            imports = [ ./${packageName}/${type}-module.nix ];
+            imports = [ ./packages/${pkgSet}/${packageName}/${type}-module.nix ];
             config.mornix.programs.${packageName}.package =
               lib.mkDefault
                 self.packages.${pkgs.stdenv.hostPlatform.system}.${packageName};
           }
         );
       nixosModules =
-        genModules [
+        genModules "" "nixos" [
           "goclacker"
           "neuswc"
           "hevel"
           "hst"
           "shko"
-        ] "nixos"
+        ]
         // {
           allPackages =
             { lib, pkgs, ... }:
@@ -53,7 +56,7 @@
             };
         };
       homeModules =
-        (genModules [
+        genModules "" "home" [
           "bt-dualboot"
           "clipboard-sync"
           "goclacker"
@@ -66,12 +69,12 @@
           "swiv"
           "tRNAscan-se"
           "waybar-mediaplayer"
-        ] "home")
+        ]
         // {
           vimPlugins =
             { lib, pkgs, ... }:
             {
-              imports = [ ./vimPlugins/home-module.nix ];
+              imports = [ ./packages/vimPlugins/home-module.nix ];
               config.mornix.programs.vimPlugins = lib.mapAttrs (_: package: {
                 package = lib.mkDefault package;
               }) (removeRecurseHint self.legacyPackages.${pkgs.stdenv.hostPlatform.system}.vimPlugins);
@@ -79,7 +82,7 @@
           zshPlugins =
             { lib, pkgs, ... }:
             {
-              imports = [ ./zshPlugins/home-module.nix ];
+              imports = [ ./packages/zshPlugins/home-module.nix ];
               config.mornix.programs.zshPlugins = lib.mapAttrs (_: package: {
                 package = lib.mkDefault package;
               }) (removeRecurseHint self.legacyPackages.${pkgs.stdenv.hostPlatform.system}.zshPlugins);
@@ -100,56 +103,42 @@
       # Do not use nested package sets.
       legacyPackages = forAllSystems (
         system: pkgs: {
-          vimPlugins = lib.recurseIntoAttrs {
-            cmp-mini-snippets = pkgs.callPackage ./vimPlugins/cmp-mini-snippets/package.nix { };
-          };
-          zshPlugins = lib.recurseIntoAttrs {
-            zimfw-completion = pkgs.callPackage ./zshPlugins/zimfw-completion/package.nix { };
-            zimfw-termtitle = pkgs.callPackage ./zshPlugins/zimfw-termtitle/package.nix { };
-            zimfw-environment = pkgs.callPackage ./zshPlugins/zimfw-environment/package.nix { };
-            zimfw-input = pkgs.callPackage ./zshPlugins/zimfw-input/package.nix { };
-          };
+          vimPlugins = lib.recurseIntoAttrs (
+            lib.mapAttrs (getPackageDrv pkgs "vimPlugins") {
+              cmp-mini-snippets = { };
+            }
+          );
+          zshPlugins = lib.recurseIntoAttrs (
+            lib.mapAttrs (getPackageDrv pkgs "zshPlugins") {
+              zimfw-completion = { };
+              zimfw-termtitle = { };
+              zimfw-environment = { };
+              zimfw-input = { };
+            }
+          );
         }
       );
       packages = forAllSystems (
         system: pkgs:
-        {
-          bt-dualboot = pkgs.callPackage ./bt-dualboot/package.nix { };
-          clipboard-sync = pkgs.callPackage ./clipboard-sync/package.nix { };
-          goclacker = pkgs.callPackage ./goclacker/package.nix { };
-          hevel = pkgs.callPackage ./hevel/package.nix {
-            inherit (self.packages.${system}) neuswc neuwld;
-          };
-          hst = pkgs.callPackage ./hst/package.nix {
-            inherit (self.packages.${system}) neuwld;
-          };
-          infernal = pkgs.callPackage ./infernal/package.nix { };
-          mojito = pkgs.callPackage ./mojito/package.nix {
-            inherit (self.packages.${system}) neuwld neuswc;
-          };
-          neumenu = pkgs.callPackage ./neumenu/package.nix {
-            inherit (self.packages.${system}) neuwld neuswc;
-          };
-          neuwld = pkgs.callPackage ./neuwld/package.nix { };
-          neuswc = pkgs.callPackage ./neuswc/package.nix {
-            inherit (self.packages.${system}) neuwld;
-          };
-          nix-search-cli = pkgs.callPackage ./nix-search-cli/package.nix { };
-          plotprimes = pkgs.callPackage ./plotprimes/package.nix { };
-          shko = pkgs.callPackage ./shko/package.nix {
-            inherit (self.packages.${system}) neuwld neuswc;
-          };
-          swall = pkgs.callPackage ./swall/package.nix { };
-          swiv = pkgs.callPackage ./swiv/package.nix {
-            inherit (self.packages.${system}) neuwld;
-          };
-          tRNAscan-se = pkgs.callPackage ./tRNAscan-se/package.nix {
-            inherit (self.packages.${system}) infernal;
-          };
-          waybar-mediaplayer = pkgs.callPackage ./waybar-mediaplayer/package.nix { };
-          wsxwm = pkgs.callPackage ./wsxwm/package.nix {
-            inherit (self.packages.${system}) neuwld neuswc;
-          };
+        lib.mapAttrs (getPackageDrv pkgs "") {
+          bt-dualboot = { };
+          clipboard-sync = { };
+          goclacker = { };
+          hevel = { inherit (self.packages.${system}) neuswc neuwld; };
+          hst = { inherit (self.packages.${system}) neuwld; };
+          infernal = { };
+          mojito = { inherit (self.packages.${system}) neuwld neuswc; };
+          neumenu = { inherit (self.packages.${system}) neuwld neuswc; };
+          neuswc = { inherit (self.packages.${system}) neuwld; };
+          neuwld = { };
+          nix-search-cli = { };
+          plotprimes = { };
+          shko = { inherit (self.packages.${system}) neuwld neuswc; };
+          swall = { };
+          swiv = { inherit (self.packages.${system}) neuwld; };
+          tRNAscan-se = { inherit (self.packages.${system}) infernal; };
+          waybar-mediaplayer = { };
+          wsxwm = { inherit (self.packages.${system}) neuwld neuswc; };
         }
         // removeRecurseHint (lib.mergeAttrsList (lib.attrValues self.legacyPackages.${system}))
       );
