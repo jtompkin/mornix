@@ -122,6 +122,7 @@
           clipboard-sync = { };
           freeway = { };
           goclacker = { };
+          hack = { inherit (self.packages.${system}) neuwld; };
           hevel = { inherit (self.packages.${system}) neuswc neuwld; };
           hst = { inherit (self.packages.${system}) neuwld; };
           infernal = { };
