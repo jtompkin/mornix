@@ -22,28 +22,25 @@
       forAllSystems = f: lib.genAttrs allSystems (system: f system nixpkgs.legacyPackages.${system});
       removeRecurseHint = attrs: removeAttrs attrs [ "recurseForDerivations" ];
       getPackageDrv =
-        pkgs: pkgSet: pkgName: args:
-        pkgs.callPackage ./packages/${pkgSet}/${pkgName}/package.nix args;
-      genModules =
-        pkgSet: type: packageNames:
-        lib.genAttrs packageNames (
-          packageName:
-          { lib, pkgs, ... }:
-          {
-            imports = [ ./packages/${pkgSet}/${packageName}/${type}-module.nix ];
-            config.mornix.programs.${packageName}.package =
-              lib.mkDefault
-                self.packages.${pkgs.stdenv.hostPlatform.system}.${packageName};
-          }
-        );
+        pkgs: pkgSet: pkgName: pkgArgs:
+        pkgs.callPackage ./packages/${pkgSet}/${pkgName}/package.nix pkgArgs;
+      getModule =
+        type: pkgSet: pkgName:
+        { lib, pkgs, ... }:
+        {
+          imports = [ ./packages/${pkgSet}/${pkgName}/${type}-module.nix ];
+          config.mornix.programs.${pkgName}.package =
+            lib.mkDefault
+              self.packages.${pkgs.stdenv.hostPlatform.system}.${pkgName};
+        };
       nixosModules =
-        genModules "" "nixos" [
+        lib.genAttrs [
           "goclacker"
           "neuswc"
           "hevel"
           "hst"
           "shko"
-        ]
+        ] (getModule "nixos" "")
         // {
           allPackages =
             { lib, pkgs, ... }:
@@ -56,7 +53,7 @@
             };
         };
       homeModules =
-        genModules "" "home" [
+        lib.genAttrs [
           "bt-dualboot"
           "clipboard-sync"
           "goclacker"
@@ -69,7 +66,7 @@
           "swiv"
           "tRNAscan-se"
           "waybar-mediaplayer"
-        ]
+        ] (getModule "home" "")
         // {
           vimPlugins =
             { lib, pkgs, ... }:
