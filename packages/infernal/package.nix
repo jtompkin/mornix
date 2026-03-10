@@ -12,6 +12,8 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-rU3a4C+STKfIW8jEp5yfh1r435autyZwL6mFy+dSSX8=";
   };
 
+  enableParallelBuilding = true;
+
   installFlags = [ "PREFIX=$(out)" ];
 
   meta = {
