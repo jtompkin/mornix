@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -9,12 +8,15 @@ let
 in
 {
   options.mornix.programs.swall = {
-    enable = lib.mkEnableOption "swall wallpaper setter";
-    package = lib.mkPackageOption pkgs "swall" { };
+    enable = lib.mkEnableOption "swall: Wallpaper setter for neuswc";
+    package = lib.mkOption {
+      type = lib.types.package;
+      description = "The swall package to use";
+    };
     finalPackage = lib.mkOption {
       type = lib.types.package;
       default = cfg.package;
-      description = "swall package that is used in config";
+      description = "The swall package that is used in the config";
     };
   };
   config = lib.mkIf cfg.enable {

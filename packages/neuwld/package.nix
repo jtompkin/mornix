@@ -49,7 +49,7 @@ stdenv.mkDerivation (finalAttrs: {
   '';
 
   meta = {
-    description = "A drawing library that targets Wayland";
+    description = "Drawing library that targets Wayland";
     homepage = "https://git.sr.ht/~shrub900/neuwld";
     license = lib.licenses.mit;
   };

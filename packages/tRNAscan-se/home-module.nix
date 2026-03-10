@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -9,8 +8,11 @@ let
 in
 {
   options.mornix.programs.tRNAscan-se = {
-    enable = lib.mkEnableOption "tRNAscan-se";
-    package = lib.mkPackageOption pkgs "tRNAscan-se" { };
+    enable = lib.mkEnableOption "tRNAscan-se: Program for detection of tRNA genes";
+    package = lib.mkOption {
+      type = lib.types.package;
+      description = "The tRNAscan-se package to use";
+    };
   };
   config = lib.mkIf cfg.enable {
     home.packages = [ cfg.package ];

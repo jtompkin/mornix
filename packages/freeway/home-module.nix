@@ -4,19 +4,19 @@
   ...
 }:
 let
-  cfg = config.mornix.programs.neumenu;
+  cfg = config.mornix.programs.freeway;
 in
 {
-  options.mornix.programs.neumenu = {
-    enable = lib.mkEnableOption "neumenu: Efficient dynamic menu for wayland";
+  options.mornix.programs.freeway = {
+    enable = lib.mkEnableOption "freeway: Simpler libwayland";
     package = lib.mkOption {
       type = lib.types.package;
-      description = "The neumenu package to use";
+      description = "The freeway package to use";
     };
     finalPackage = lib.mkOption {
       type = lib.types.package;
       default = cfg.package;
-      description = "The neumenu package that is used in the config";
+      description = "The freeway package that is used in the config";
     };
   };
   config = lib.mkIf cfg.enable {

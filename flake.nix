@@ -30,7 +30,7 @@
         {
           imports = [ ./packages/${pkgSet}/${pkgName}/${type}-module.nix ];
           config.mornix.programs.${pkgName}.package =
-            lib.mkDefault
+            lib.mkOptionDefault
               self.packages.${pkgs.stdenv.hostPlatform.system}.${pkgName};
         };
       nixosModules =

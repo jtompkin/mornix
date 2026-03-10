@@ -43,7 +43,7 @@ stdenv.mkDerivation (finalAttrs: {
   ];
 
   meta = {
-    description = "An efficient dynamic menu for wayland";
+    description = "Efficient dynamic menu for wayland";
     homepage = "https://git.sr.ht/~uint/neumenu";
     license = lib.licenses.mit;
     mainProgram = "neumenu";

@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -11,27 +10,36 @@ in
 {
   options.mornix = {
     programs.clipboard-sync = {
-      enable = lib.mkEnableOption "clipboard-sync, a clipboard synchronizer";
-      package = lib.mkPackageOption pkgs "clipboard-sync" { };
+      enable = lib.mkEnableOption "clipboard-sync: Synchronize the clipboard across multiple X11 and Wayland instances";
+      package = lib.mkOption {
+        type = lib.types.package;
+        description = "The clipboard-sync package to use";
+      };
     };
     services.clipboard-sync.enable = lib.mkEnableOption "clipboard-sync systemd service";
   };
-  config.home.packages = lib.mkIf programCfg.enable [ programCfg.package ];
-  # Stolen from: https://github.com/dnut/clipboard-sync/blob/master/flake.nix
-  config.systemd.user.services.clipboard-sync = lib.mkIf serviceCfg.enable {
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
-    };
-    Unit = {
-      Description = "Synchronize cliboards across all displays";
-      Documentation = [ "https://github.com/dnut/clipboard-sync" ];
-      Requisite = [ "graphical-session.target" ];
-      PartOf = [ "graphical-session.target" ];
-      After = [ "graphical-session.target" ];
-    };
-    Service = {
-      ExecStart = "/usr/bin/env ${lib.getExe programCfg.package} --hide-timestamp --log-level debug";
-      Restart = "on-failure";
-    };
-  };
+  config = lib.mkMerge [
+    (lib.mkIf programCfg.enable {
+      home.packages = [ programCfg.package ];
+    })
+    (lib.mkIf serviceCfg.enable {
+      # Stolen from: https://github.com/dnut/clipboard-sync/blob/master/flake.nix
+      systemd.user.services.clipboard-sync = {
+        Install = {
+          WantedBy = [ "graphical-session.target" ];
+        };
+        Unit = {
+          Description = "Synchronize cliboards across all displays";
+          Documentation = [ "https://github.com/dnut/clipboard-sync" ];
+          Requisite = [ "graphical-session.target" ];
+          PartOf = [ "graphical-session.target" ];
+          After = [ "graphical-session.target" ];
+        };
+        Service = {
+          ExecStart = "/usr/bin/env ${lib.getExe programCfg.package} --hide-timestamp --log-level debug";
+          Restart = "on-failure";
+        };
+      };
+    })
+  ];
 }

@@ -4,19 +4,19 @@
   ...
 }:
 let
-  cfg = config.mornix.programs.hst;
+  cfg = config.mornix.programs.neuwld;
 in
 {
-  options.mornix.programs.hst = {
-    enable = lib.mkEnableOption "hst: Fork of st-wl using neuwld";
+  options.mornix.programs.neuwld = {
+    enable = lib.mkEnableOption "neuwld: Drawing library that targets Wayland";
     package = lib.mkOption {
       type = lib.types.package;
-      description = "The hst package to use";
+      description = "The neuwld package to use";
     };
     finalPackage = lib.mkOption {
       type = lib.types.package;
       default = cfg.package;
-      description = "The hst package that is used in the config";
+      description = "The neuwld package that is used in the config";
     };
   };
   config = lib.mkIf cfg.enable {

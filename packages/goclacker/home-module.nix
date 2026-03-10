@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -10,8 +9,11 @@ let
 in
 {
   options.mornix.programs.goclacker = {
-    enable = lib.mkEnableOption "goclacker RPN calculator";
-    package = lib.mkPackageOption pkgs "goclacker" { };
+    enable = lib.mkEnableOption "goclacker: Command line reverse Polish notation calculator";
+    package = lib.mkOption {
+      type = lib.types.package;
+      description = "The goclacker package to use";
+    };
     prompt = mkOption {
       type = types.str;
       default = "";

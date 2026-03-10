@@ -4,19 +4,19 @@
   ...
 }:
 let
-  cfg = config.mornix.programs.neumenu;
+  cfg = config.mornix.programs.neuwld;
 in
 {
-  options.mornix.programs.neumenu = {
-    enable = lib.mkEnableOption "neumenu: Efficient dynamic menu for wayland";
+  options.mornix.programs.neuwld = {
+    enable = lib.mkEnableOption "neuwld: Drawing library that targets Wayland";
     package = lib.mkOption {
       type = lib.types.package;
-      description = "The neumenu package to use";
+      description = "The neuwld package to use";
     };
     finalPackage = lib.mkOption {
       type = lib.types.package;
       default = cfg.package;
-      description = "The neumenu package that is used in the config";
+      description = "The neuwld package that is used in the config";
     };
   };
   config = lib.mkIf cfg.enable {

@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -9,8 +8,11 @@ let
 in
 {
   options.mornix.programs.plotprimes = {
-    enable = lib.mkEnableOption "plotprimes, a tool to plot primes in a polar coordinate system";
-    package = lib.mkPackageOption pkgs "plotprimes" { };
+    enable = lib.mkEnableOption "plotprimes: Make nice polar plots of prime numbers";
+    package = lib.mkOption {
+      type = lib.types.package;
+      description = "The plotprimes package to use";
+    };
   };
   config = lib.mkIf cfg.enable {
     home.packages = [ cfg.package ];

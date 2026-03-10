@@ -52,7 +52,7 @@ stdenv.mkDerivation (finalAttrs: {
   installFlags = [ "PREFIX=$(out)" ];
 
   meta = {
-    description = "A fork of swc with more features";
+    description = "Fork of swc with more features";
     homepage = "https://git.sr.ht/~shrub900/neuswc";
     license = lib.licenses.mit;
     mainProgram = "swc-launch";

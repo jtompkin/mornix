@@ -68,7 +68,7 @@ stdenv.mkDerivation (finalAttrs: {
   '';
 
   meta = {
-    description = "A scrollable, floating window manager for Wayland";
+    description = "Scrollable, floating window manager for Wayland";
     homepage = "https://git.sr.ht/~dlm/hevel";
     license = lib.licenses.mit;
     mainProgram = "hevel";

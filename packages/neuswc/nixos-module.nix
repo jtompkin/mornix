@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -9,12 +8,15 @@ let
 in
 {
   options.mornix.programs.neuswc = {
-    enable = lib.mkEnableOption "neuswc";
-    package = lib.mkPackageOption pkgs "neuswc" { };
+    enable = lib.mkEnableOption "neuswc: Fork of swc with more features";
+    package = lib.mkOption {
+      type = lib.types.package;
+      description = "The neuswc package to use";
+    };
     finalPackage = lib.mkOption {
       type = lib.types.package;
       default = cfg.package;
-      description = "neuswc package that is used for config";
+      description = "The neuswc package that is used in the config";
     };
   };
   config = lib.mkIf cfg.enable {

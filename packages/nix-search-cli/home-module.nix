@@ -6,7 +6,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -14,8 +13,11 @@ let
 in
 {
   options.mornix.programs.nix-search-cli = {
-    enable = lib.mkEnableOption "nix-search-cli, a CLI for searching packages on search.nixos.org";
-    package = lib.mkPackageOption pkgs "nix-search-cli" { };
+    enable = lib.mkEnableOption "nix-search-cli: CLI for searching packages on search.nixos.org";
+    package = lib.mkOption {
+      type = lib.types.package;
+      description = "The nix-search-cli package to use";
+    };
   };
   config = lib.mkIf cfg.enable {
     home.packages = [ cfg.package ];

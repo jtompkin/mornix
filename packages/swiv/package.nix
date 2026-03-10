@@ -36,7 +36,7 @@ stdenv.mkDerivation (finalAttrs: {
   makeFlags = [ "PREFIX=$(out)" ];
 
   meta = {
-    description = "A simple wayland image viewer";
+    description = "Simple wayland image viewer";
     homepage = "https://git.sr.ht/~shrub900/swiv";
     mainProgram = "swiv";
   };

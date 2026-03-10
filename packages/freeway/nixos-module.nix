@@ -4,19 +4,19 @@
   ...
 }:
 let
-  cfg = config.mornix.programs.hst;
+  cfg = config.mornix.programs.freeway;
 in
 {
-  options.mornix.programs.hst = {
-    enable = lib.mkEnableOption "hst: Fork of st-wl using neuwld";
+  options.mornix.programs.freeway = {
+    enable = lib.mkEnableOption "freeway: Simpler libwayland";
     package = lib.mkOption {
       type = lib.types.package;
-      description = "The hst package to use";
+      description = "The freeway package to use";
     };
     finalPackage = lib.mkOption {
       type = lib.types.package;
       default = cfg.package;
-      description = "The hst package that is used in the config";
+      description = "The freeway package that is used in the config";
     };
   };
   config = lib.mkIf cfg.enable {

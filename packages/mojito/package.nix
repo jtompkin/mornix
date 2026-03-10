@@ -45,7 +45,7 @@ stdenv.mkDerivation (finalAttrs: {
   installFlags = [ "PREFIX=$(out)" ];
 
   meta = {
-    description = "A featherweight, lime-scented (and somewhat alcoholic) bar for Wayland";
+    description = "Featherweight, lime-scented (and somewhat alcoholic) bar for Wayland";
     homepage = "https://git.sr.ht/~dlm/mojito";
     license = lib.licenses.isc;
   };

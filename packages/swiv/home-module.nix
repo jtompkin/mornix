@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -9,12 +8,15 @@ let
 in
 {
   options.mornix.programs.swiv = {
-    enable = lib.mkEnableOption "swiv image viewer";
-    package = lib.mkPackageOption pkgs "swiv" { };
+    enable = lib.mkEnableOption "swiv: Simple wayland image viewer";
+    package = lib.mkOption {
+      type = lib.types.package;
+      description = "The swiv package to use";
+    };
     finalPackage = lib.mkOption {
       type = lib.types.package;
       default = cfg.package;
-      description = "swiv package that is used in config";
+      description = "The swiv package that is used in the config";
     };
   };
   config = lib.mkIf cfg.enable {

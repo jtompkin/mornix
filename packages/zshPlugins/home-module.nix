@@ -1,34 +1,21 @@
 {
   lib,
-  pkgs,
   ...
 }:
 {
   options.mornix.programs.zshPlugins = {
     enable = lib.mkEnableOption "Zsh plugins (currently unused)";
-    zimfw-completion.package = lib.mkPackageOption pkgs "zimfw-completion" {
-      default = [
-        "zshPlugins"
-        "zimfw-completion"
-      ];
+    zimfw-completion.package = lib.mkOption {
+      type = lib.types.package;
     };
-    zimfw-environment.package = lib.mkPackageOption pkgs "zimfw-environment" {
-      default = [
-        "zshPlugins"
-        "zimfw-environment"
-      ];
+    zimfw-environment.package = lib.mkOption {
+      type = lib.types.package;
     };
-    zimfw-input.package = lib.mkPackageOption pkgs "zimfw-input" {
-      default = [
-        "zshPlugins"
-        "zimfw-input"
-      ];
+    zimfw-input.package = lib.mkOption {
+      type = lib.types.package;
     };
-    zimfw-termtitle.package = lib.mkPackageOption pkgs "zimfw-termtitle" {
-      default = [
-        "zshPlugins"
-        "zimfw-termtitle"
-      ];
+    zimfw-termtitle.package = lib.mkOption {
+      type = lib.types.package;
     };
   };
 }
