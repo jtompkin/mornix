@@ -120,6 +120,7 @@
         lib.mapAttrs (getPackageDrv pkgs "") {
           bt-dualboot = { };
           clipboard-sync = { };
+          freeway = { };
           goclacker = { };
           hevel = { inherit (self.packages.${system}) neuswc neuwld; };
           hst = { inherit (self.packages.${system}) neuwld; };

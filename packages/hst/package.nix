@@ -4,18 +4,18 @@
   fetchFromSourcehut,
   writeText,
 
+  ncurses,
   pkg-config,
   wayland-scanner,
-  ncurses,
 
-  libdrm,
-  wayland-protocols,
-  freetype,
   fontconfig,
-  wayland,
+  freetype,
+  libdrm,
   libxkbcommon,
   neuwld,
   pixman,
+  wayland,
+  wayland-protocols,
 
   # Customization
   config,
@@ -53,14 +53,14 @@ stdenv.mkDerivation (finalAttrs: {
     ncurses
   ];
   buildInputs = [
-    libdrm
-    wayland-protocols
-    freetype
     fontconfig
-    wayland
+    freetype
+    libdrm
     libxkbcommon
     neuwld
     pixman
+    wayland
+    wayland-protocols
   ]
   ++ extraLibs;
 

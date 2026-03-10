@@ -47,7 +47,6 @@ stdenv.mkDerivation (finalAttrs: {
       DRM_DRIVERS="${lib.concatStringsSep " " drmDrivers}"
     )
   '';
-  # installFlags = [ "PREFIX=$(out)" ];
 
   meta = {
     description = "A drawing library that targets Wayland";
