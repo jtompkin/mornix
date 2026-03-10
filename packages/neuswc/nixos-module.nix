@@ -18,6 +18,14 @@ in
     };
   };
   config = lib.mkIf cfg.enable {
+    warnings = [
+      ''
+        Module mornix.programs.neuswc: SECURITY WARNING
+          This module installs a setuid wrapper for the swc-launch program.
+          Make sure you trust the following package before running the executable:
+          ${cfg.finalPackage}
+      ''
+    ];
     environment.systemPackages = [ cfg.finalPackage ];
     security.wrappers.swc-launch = {
       setuid = true;
