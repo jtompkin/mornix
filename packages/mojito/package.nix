@@ -1,7 +1,7 @@
 {
   lib,
   stdenv,
-  fetchgit,
+  fetchFromSourcehut,
 
   pkg-config,
 
@@ -20,8 +20,9 @@ stdenv.mkDerivation (finalAttrs: {
   version = "2025-03-07";
   _commit = "0b4307cb252b55e7f423c10882e6f5eba855d083";
 
-  src = fetchgit {
-    url = "https://git.sr.ht/~dlm/mojito";
+  src = fetchFromSourcehut {
+    owner = "~dlm";
+    repo = "mojito";
     rev = finalAttrs._commit;
     hash = "sha256-FQGjB4u1XIsbErcO2RlR6IU10wi6tlRecjS56gERWjs=";
   };

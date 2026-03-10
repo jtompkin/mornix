@@ -1,7 +1,7 @@
 {
   lib,
   stdenv,
-  fetchgit,
+  fetchFromSourcehut,
 
   pkg-config,
   wayland-scanner,
@@ -18,8 +18,9 @@ stdenv.mkDerivation (finalAttrs: {
   version = "2026-02-26";
   _commit = "88d0bd8bb47a3bea4e806087b4be95af226d5bb3";
 
-  src = fetchgit {
-    url = "https://git.sr.ht/~uint/neumenu";
+  src = fetchFromSourcehut {
+    owner = "~uint";
+    repo = "neumenu";
     rev = finalAttrs._commit;
     hash = "sha256-oASly6REP1EGV8jBROMZJR+Q8TrkVNKga4Yub37xjxo=";
   };

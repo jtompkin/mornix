@@ -1,7 +1,7 @@
 {
   lib,
   stdenv,
-  fetchgit,
+  fetchFromSourcehut,
   writeText,
 
   pkg-config,
@@ -28,8 +28,9 @@ stdenv.mkDerivation (finalAttrs: {
   version = "2026-02-03";
   _commit = "6187ef823d1fabe2139aed54dbb7a7e28c6d8ff4";
 
-  src = fetchgit {
-    url = "https://git.sr.ht/~dlm/hst";
+  src = fetchFromSourcehut {
+    owner = "~dlm";
+    repo = "hst";
     rev = finalAttrs._commit;
     hash = "sha256-9BOPmt7Yjz0YfOfK6tOhqKg0l+so3xsXoeSG+5qUF0g=";
   };

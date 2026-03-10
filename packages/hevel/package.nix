@@ -1,7 +1,7 @@
 {
   lib,
   stdenv,
-  fetchgit,
+  fetchFromSourcehut,
   writeText,
 
   bmake,
@@ -29,8 +29,9 @@ stdenv.mkDerivation (finalAttrs: {
   version = "2026-03-07";
   _commit = "822c3bd12d603305cfe6b3ff95fa1ac85194d42b";
 
-  src = fetchgit {
-    url = "https://git.sr.ht/~dlm/hevel";
+  src = fetchFromSourcehut {
+    owner = "~dlm";
+    repo = "hevel";
     rev = finalAttrs._commit;
     hash = "sha256-1N/xlRIPT/94OKEpxkAeAu7aLPPSLConJJcGchGHr/g=";
   };

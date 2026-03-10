@@ -1,7 +1,7 @@
 {
   lib,
   stdenv,
-  fetchgit,
+  fetchFromSourcehut,
   writeText,
 
   zig,
@@ -26,8 +26,9 @@ stdenv.mkDerivation (finalAttrs: {
   version = "2026-03-07";
   _commit = "a21d5b6a76dcf161f1b374b32a93a7e4c1439212";
 
-  src = fetchgit {
-    url = "https://git.sr.ht/~chld/shko";
+  src = fetchFromSourcehut {
+    owner = "~chld";
+    repo = "shko";
     rev = finalAttrs._commit;
     hash = "sha256-PLj1TqZkhaSYgbtWwnfjGjF4ZtDAmkDxUadeEReGwf0=";
   };

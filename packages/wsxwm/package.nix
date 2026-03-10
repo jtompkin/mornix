@@ -1,7 +1,7 @@
 {
   lib,
   stdenv,
-  fetchgit,
+  fetchFromSourcehut,
 
   bmake,
   pkg-config,
@@ -21,8 +21,9 @@ stdenv.mkDerivation (finalAttrs: {
   version = "2026-02-21";
   _commit = "f5f3c1f53b77d41ab0b0aefabb64e86881b5705d";
 
-  src = fetchgit {
-    url = "https://git.sr.ht/~uint/wsxwm";
+  src = fetchFromSourcehut {
+    owner = "~uint";
+    repo = "wsxwm";
     rev = finalAttrs._commit;
     hash = "sha256-xXyRdFU/HYgbs9drGnqAh4mz4BgtcYfc6VJX8SvXFD4=";
   };

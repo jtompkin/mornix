@@ -1,7 +1,7 @@
 {
   lib,
   stdenv,
-  fetchgit,
+  fetchFromSourcehut,
 
   bmake,
   pkg-config,
@@ -22,8 +22,9 @@ stdenv.mkDerivation (finalAttrs: {
   version = "2026-02-28";
   _commit = "f0147d3d9b84f5d81ad14260f08808afc563e54d";
 
-  src = fetchgit {
-    url = "https://git.sr.ht/~shrub900/neuswc";
+  src = fetchFromSourcehut {
+    owner = "~shrub900";
+    repo = "neuswc";
     rev = finalAttrs._commit;
     hash = "sha256-2y7nKZKKWQaxJSuz5ia4VIcR4ibsAt/M6oqDy5jRpg4=";
   };

@@ -1,7 +1,7 @@
 {
   lib,
   stdenv,
-  fetchgit,
+  fetchFromSourcehut,
 
   pkg-config,
   wayland-scanner,
@@ -13,8 +13,9 @@ stdenv.mkDerivation (finalAttrs: {
   version = "2026-02-21";
   _commit = "fed1981e7f739a38193f9b3b32398ca75d2e7d29";
 
-  src = fetchgit {
-    url = "https://git.sr.ht/~uint/swall";
+  src = fetchFromSourcehut {
+    owner = "~uint";
+    repo = "swall";
     rev = finalAttrs._commit;
     hash = "sha256-mdOTTTA/mwP/GNbiEWiX0QMZEiseLAMuecUFwMyqOsw=";
   };

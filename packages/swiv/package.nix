@@ -1,6 +1,6 @@
 {
   stdenv,
-  fetchgit,
+  fetchFromSourcehut,
 
   pkg-config,
   wayland-scanner,
@@ -15,8 +15,9 @@ stdenv.mkDerivation (finalAttrs: {
   version = "2026-02-08";
   _commit = "53948d6838123df4bb5840e13ebd4cfc4ec92e23";
 
-  src = fetchgit {
-    url = "https://git.sr.ht/~shrub900/swiv";
+  src = fetchFromSourcehut {
+    owner = "~shrub900";
+    repo = "swiv";
     rev = finalAttrs._commit;
     hash = "sha256-z0a5b6yn6ti4oy63SpOZtbYziNOOYG0Z0Er64pvSlFw=";
   };
