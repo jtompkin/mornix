@@ -19,8 +19,8 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "neuswc";
-  version = "2026-02-28";
-  _commit = "f0147d3d9b84f5d81ad14260f08808afc563e54d";
+  version = "0-unstable-2026-02-28";
+  _commit = "d7a9eda640d4b4d96f6158266099d3c3fe8e5673";
 
   src = fetchFromSourcehut {
     owner = "~shrub900";

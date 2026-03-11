@@ -27,7 +27,7 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "hack";
-  version = "2026-02-01";
+  version = "0-unstable-2026-02-01";
   _commit = "346ada49eaa2fb47d81822c567fc5f0876163f80";
 
   src = fetchFromSourcehut {

@@ -17,7 +17,7 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "mojito";
-  version = "2025-03-07";
+  version = "0-unstable-2026-03-07";
   _commit = "0b4307cb252b55e7f423c10882e6f5eba855d083";
 
   src = fetchFromSourcehut {

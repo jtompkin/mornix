@@ -9,7 +9,7 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "freeway";
-  version = "2026-02-09";
+  version = "0-unstable-2026-02-09";
   _commit = "562b1710346337be0ef12f56a7306f907811577d";
 
   src = fetchFromSourcehut {

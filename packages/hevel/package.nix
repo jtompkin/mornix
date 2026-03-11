@@ -26,14 +26,14 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "hevel";
-  version = "2026-03-07";
-  _commit = "822c3bd12d603305cfe6b3ff95fa1ac85194d42b";
+  version = "0-unstable-2026-03-09";
+  _commit = "f5f689cfe2d0f398ad227af1fba2d960cee000c6";
 
   src = fetchFromSourcehut {
     owner = "~dlm";
     repo = "hevel";
     rev = finalAttrs._commit;
-    hash = "sha256-1N/xlRIPT/94OKEpxkAeAu7aLPPSLConJJcGchGHr/g=";
+    hash = "sha256-M8X+bE3EM/vpUyLIyQ0TIRAhiTR+u8UL2/niqV4gUdY=";
   };
 
   inherit patches;

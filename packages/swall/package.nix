@@ -10,7 +10,7 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "swall";
-  version = "2026-02-21";
+  version = "0-unstable-2026-02-21";
   _commit = "fed1981e7f739a38193f9b3b32398ca75d2e7d29";
 
   src = fetchFromSourcehut {

@@ -21,7 +21,7 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "swclock";
-  version = "2026-02-08";
+  version = "0-unstable-2026-02-08";
   _commit = "6b235cc8034b4da78cd322c382aee9d870175d81";
 
   src = fetchFromSourcehut {

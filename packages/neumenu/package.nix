@@ -15,7 +15,7 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "neumenu";
-  version = "2026-02-26";
+  version = "0-unstable-2026-02-26";
   _commit = "88d0bd8bb47a3bea4e806087b4be95af226d5bb3";
 
   src = fetchFromSourcehut {

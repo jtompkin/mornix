@@ -12,7 +12,7 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "swiv";
-  version = "2026-02-08";
+  version = "0-unstable-2026-02-08";
   _commit = "53948d6838123df4bb5840e13ebd4cfc4ec92e23";
 
   src = fetchFromSourcehut {

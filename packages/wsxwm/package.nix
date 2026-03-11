@@ -18,7 +18,7 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "wsxwm";
-  version = "2026-02-21";
+  version = "0-unstable-2026-02-21";
   _commit = "f5f3c1f53b77d41ab0b0aefabb64e86881b5705d";
 
   src = fetchFromSourcehut {
