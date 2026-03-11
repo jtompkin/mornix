@@ -7,6 +7,7 @@
   ncurses,
   pkg-config,
   wayland-scanner,
+  versionCheckHook,
 
   fontconfig,
   freetype,
@@ -47,6 +48,10 @@ stdenv.mkDerivation (finalAttrs: {
     cp ${finalAttrs.configFile} config.def.h
   '';
 
+  doInstallCheck = true;
+  versionCheckProgramArg = "-v";
+
+  nativeInstallCheckInputs = [ versionCheckHook ];
   nativeBuildInputs = [
     pkg-config
     wayland-scanner
@@ -63,7 +68,6 @@ stdenv.mkDerivation (finalAttrs: {
     wayland-protocols
   ]
   ++ extraLibs;
-
   strictDeps = true;
 
   preInstall = ''
@@ -71,7 +75,10 @@ stdenv.mkDerivation (finalAttrs: {
     mkdir -p $TERMINFO $out/nix-support
     echo "$terminfo" >> $out/nix-support/propagated-user-env-packages
   '';
-  installFlags = [ "PREFIX=$(out)" ];
+  makeFlags = [
+    "VERSION=${finalAttrs.version}"
+    "PREFIX=$(out)"
+  ];
 
   meta = {
     description = "Fork of st-wl using neuwld";
