@@ -35,11 +35,19 @@
         };
       nixosModules =
         lib.genAttrs [
+          "freeway"
           "goclacker"
-          "neuswc"
           "hevel"
           "hst"
+          "mojito"
+          "neumenu"
+          "neuswc"
+          "neuwld"
           "shko"
+          "swall"
+          "swclock"
+          "swiv"
+          "wsxwm"
         ] (getModule "nixos" "")
         // {
           allPackages =
@@ -56,16 +64,23 @@
         lib.genAttrs [
           "bt-dualboot"
           "clipboard-sync"
+          "freeway"
           "goclacker"
+          "hevel"
           "hst"
           "mojito"
           "neumenu"
+          "neuswc"
+          "neuwld"
           "nix-search-cli"
           "plotprimes"
+          "shko"
           "swall"
+          "swclock"
           "swiv"
           "tRNAscan-se"
           "waybar-mediaplayer"
+          "wsxwm"
         ] (getModule "home" "")
         // {
           vimPlugins =
