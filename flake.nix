@@ -142,6 +142,7 @@
           hst = { inherit (self.packages.${system}) neuwld; };
           infernal = { };
           mojito = { inherit (self.packages.${system}) neuwld neuswc; };
+          ncbi-datasets-cli = { };
           neumenu = { inherit (self.packages.${system}) neuwld neuswc; };
           neuswc = { inherit (self.packages.${system}) neuwld; };
           neuwld = { };
