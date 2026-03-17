@@ -141,12 +141,12 @@
           hevel = { inherit (self.packages.${system}) neuswc neuwld; };
           hst = { inherit (self.packages.${system}) neuwld; };
           infernal = { };
+          klatka = { inherit (self.packages.${system}) neuwld neuswc; };
           mojito = { inherit (self.packages.${system}) neuwld neuswc; };
           ncbi-datasets-cli = { };
           neumenu = { inherit (self.packages.${system}) neuwld neuswc; };
           neuswc = { inherit (self.packages.${system}) neuwld; };
           neuwld = { };
-          wled = { };
           nix-search-cli = { };
           plotprimes = { };
           shko = { inherit (self.packages.${system}) neuwld neuswc; };
@@ -155,6 +155,7 @@
           swiv = { inherit (self.packages.${system}) neuwld; };
           tRNAscan-se = { inherit (self.packages.${system}) infernal; };
           waybar-mediaplayer = { };
+          wled = { };
           wsxwm = { inherit (self.packages.${system}) neuwld neuswc; };
         }
         // removeRecurseHint (lib.mergeAttrsList (lib.attrValues self.legacyPackages.${system}))
