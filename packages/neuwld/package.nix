@@ -3,7 +3,9 @@
   stdenv,
   fetchFromSourcehut,
 
-  bmake,
+  doxygen,
+  meson,
+  ninja,
   pkg-config,
   wayland-scanner,
 
@@ -12,28 +14,31 @@
   pixman,
   wayland,
 
+  # Choices: auto, intel, nouveau
   drmDrivers ? [
-    "intel"
-    "noveau"
+    "auto"
   ],
+  buildDocumentation ? false,
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "neuwld";
-  version = "0-unstable-2026-03-07";
-  _commit = "235b7b62be7d7c9eefa011eac4a5b78ba7390f1c";
+  version = "0-unstable-2026-03-12";
+  _commit = "1039dce08fc9bc1c8f03394e6a07f755deb5da0a";
 
   src = fetchFromSourcehut {
     owner = "~shrub900";
     repo = "neuwld";
     rev = finalAttrs._commit;
-    hash = "sha256-0+rgWrefh19bBEmcqw0Lal1PHkendtCkQ2EIg+LHb74=";
+    hash = "sha256-gfPeK2H/FtXKiOYrRxY/kQDBs2SyrY78R5blpii5nfM=";
   };
 
   nativeBuildInputs = [
-    bmake
+    meson
+    ninja
     pkg-config
     wayland-scanner
-  ];
+  ]
+  ++ lib.optional buildDocumentation doxygen;
   buildInputs = [
     fontconfig
     libdrm
@@ -41,12 +46,11 @@ stdenv.mkDerivation (finalAttrs: {
     wayland
   ];
 
-  preBuild = ''
-    makeFlagsArray+=(
-      PREFIX="$out"
-      DRM_DRIVERS="${lib.concatStringsSep " " drmDrivers}"
-    )
-  '';
+  mesonFlags = [
+    "-Ddoxygen=${if buildDocumentation then "enabled" else "disabled"}"
+    "-Ddrivers=${lib.concatStringsSep "," drmDrivers}"
+    "-Ddefault_library=both"
+  ];
 
   meta = {
     description = "Drawing library that targets Wayland";
