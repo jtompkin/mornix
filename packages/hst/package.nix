@@ -27,6 +27,7 @@
 stdenv.mkDerivation (finalAttrs: {
   pname = "hst";
   version = "0-unstable-2026-02-03";
+  _version = "0.8.2";
   _commit = "6187ef823d1fabe2139aed54dbb7a7e28c6d8ff4";
 
   src = fetchFromSourcehut {
@@ -43,13 +44,20 @@ stdenv.mkDerivation (finalAttrs: {
 
   inherit patches;
 
-  configFile = lib.optionalString (conf != null) (writeText "config.def.h" conf);
+  configFile =
+    if lib.isDerivation conf || builtins.isPath conf then
+      conf
+    else
+      writeText "config.def.h" (toString conf);
   postPatch = lib.optionalString (conf != null) ''
     cp ${finalAttrs.configFile} config.def.h
   '';
 
   doInstallCheck = true;
   versionCheckProgramArg = "-v";
+  preVersionCheck = ''
+    version=${finalAttrs._version}
+  '';
 
   nativeInstallCheckInputs = [ versionCheckHook ];
   nativeBuildInputs = [
@@ -75,10 +83,7 @@ stdenv.mkDerivation (finalAttrs: {
     mkdir -p $TERMINFO $out/nix-support
     echo "$terminfo" >> $out/nix-support/propagated-user-env-packages
   '';
-  makeFlags = [
-    "VERSION=${finalAttrs.version}"
-    "PREFIX=$(out)"
-  ];
+  installFlags = [ "PREFIX=$(out)" ];
 
   meta = {
     description = "Fork of st-wl using neuwld";

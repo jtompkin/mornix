@@ -2,6 +2,8 @@
   lib,
   stdenv,
   fetchurl,
+
+  versionCheckHook,
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "infernal";
@@ -13,6 +15,12 @@ stdenv.mkDerivation (finalAttrs: {
   };
 
   enableParallelBuilding = true;
+
+  doInstallCheck = true;
+  versionCheckProgram = "${placeholder "out"}/bin/cmsearch";
+  versionCheckProgramArg = "-h";
+
+  nativeInstallCheckInputs = [ versionCheckHook ];
 
   installFlags = [ "PREFIX=$(out)" ];
 

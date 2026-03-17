@@ -1,7 +1,6 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -i bash -p nix-update -p fd -p ripgrep
-pkgs_list="$(fd -t f -e nix package packages -X rg -l _commit)"
-mapfile update_to_head <<<"${pkgs_list}"
+#!nix-shell -i bash -p nix-update
+mapfile -d '' update_to_head < <(find packages -type f -name package.nix -print0 | xargs -0 grep -Zl _commit || true)
 n=${#update_to_head[@]}
 for ((i=0; i<n; i++)); do
     pkg_path="${update_to_head[i]}"

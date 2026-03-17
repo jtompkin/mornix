@@ -58,7 +58,7 @@ stdenv.mkDerivation (finalAttrs: {
     if lib.isDerivation conf || builtins.isPath conf then
       conf
     else
-      writeText "config.h" (toString conf);
+      writeText "config.zig" (toString conf);
   postPatch = lib.optionalString (conf != null) ''
     cp ${finalAttrs.configFile} config.zig
   '';

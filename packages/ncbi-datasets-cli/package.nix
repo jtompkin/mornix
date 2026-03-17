@@ -1,9 +1,9 @@
 {
   lib,
   stdenv,
-  fetchurl,
+  fetchzip,
 
-  unzip,
+  versionCheckHook,
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "ncbi-datasets-cli";
@@ -11,19 +11,21 @@ stdenv.mkDerivation (finalAttrs: {
   systemString =
     {
       x86_64-linux = "linux-amd64";
-      aarch64-linux = "linux-arm64";
       x86_64-darwin = "darwin-amd64";
+      aarch64-linux = "linux-arm64";
       aarch64-darwin = "darwin-arm64";
     }
     .${stdenv.hostPlatform.system};
 
-  src = fetchurl {
+  src = fetchzip {
     url = "https://github.com/ncbi/datasets/releases/download/v${finalAttrs.version}/${finalAttrs.systemString}.cli.package.zip";
-    hash = "sha256-RYoxa34EvpmyiiCZQjgWnUytdKuttlyoHOKvbjFNlgw=";
+    hash = "sha256-QNoUoyHqOmNHIdvSJSu3op0TX9pSSFqTPQm11BwSNK0=";
+    stripRoot = false;
   };
-  sourceRoot = ".";
 
-  nativeBuildInputs = [ unzip ];
+  doInstallCheck = true;
+
+  nativeInstallCheckInputs = [ versionCheckHook ];
 
   installPhase = ''
     runHook preInstall

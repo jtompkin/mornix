@@ -4,6 +4,7 @@
   fetchFromSourcehut,
 
   pkg-config,
+  versionCheckHook,
 
   fontconfig,
   libdrm,
@@ -27,6 +28,13 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-FQGjB4u1XIsbErcO2RlR6IU10wi6tlRecjS56gERWjs=";
   };
 
+  doInstallCheck = true;
+  versionCheckProgramArg = "-h";
+  preVersionCheck = ''
+    version=mojito
+  '';
+
+  nativeInstallCheckInputs = [ versionCheckHook ];
   nativeBuildInputs = [
     pkg-config
   ];
