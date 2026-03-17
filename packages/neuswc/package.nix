@@ -3,53 +3,68 @@
   stdenv,
   fetchFromSourcehut,
 
-  bmake,
+  meson,
+  ninja,
   pkg-config,
   wayland-scanner,
 
-  libxcb-wm,
-  libinput,
-  neuwld,
-  wayland,
-  libdrm,
   fontconfig,
-  pixman,
+  libdrm,
+  libinput,
+  libxcb-wm,
   libxkbcommon,
+  neuwld,
+  pixman,
+  wayland,
   wayland-protocols,
+  xwayland,
+
+  # Choices: libinput, evdev
+  inputBackend ? "libinput",
+  withXWayland ? true,
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "neuswc";
-  version = "0-unstable-2026-02-28";
-  _commit = "d7a9eda640d4b4d96f6158266099d3c3fe8e5673";
+  version = "0-unstable-2026-03-15";
+  _commit = "bf9503ad5088c14dd175c95b7cd298e8bfe23976";
 
   src = fetchFromSourcehut {
     owner = "~shrub900";
     repo = "neuswc";
     rev = finalAttrs._commit;
-    hash = "sha256-2y7nKZKKWQaxJSuz5ia4VIcR4ibsAt/M6oqDy5jRpg4=";
+    hash = "sha256-ue1z/dabHgcWXDq1ahJPrH6IxbsSDUbPtfDYWLBULWQ=";
   };
 
   nativeBuildInputs = [
-    bmake
+    meson
+    ninja
     pkg-config
     wayland-scanner
   ];
   buildInputs = [
+    fontconfig
+    libdrm
     libxcb-wm
-    libinput
+    libxkbcommon
     neuwld
+    pixman
     wayland
     wayland-protocols
-    libdrm
-    fontconfig
-    pixman
-    libxkbcommon
+  ]
+  ++ lib.optional withXWayland xwayland
+  ++ lib.optional (inputBackend == "libinput") libinput;
+
+  mesonFlags = [
+    "-Dxwayland=${if withXWayland then "enabled" else "disabled"}"
+    "-Dinput=${inputBackend}"
   ];
 
-  preInstall = ''
-    sed -i 's/install -m 4755/install -m 755/g' Makefile
+  # TODO: remove once build system does this (maybe it already can I don't fucking know meson)
+  postInstall = ''
+    cp protocol/*.h $out/include 
+    mkdir -p $out/share/swc
+    cp ../protocol/*.xml $out/share/swc
   '';
-  installFlags = [ "PREFIX=$(out)" ];
 
   meta = {
     description = "Fork of swc with more features";
