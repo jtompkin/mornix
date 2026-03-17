@@ -23,14 +23,14 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "shko";
-  version = "0-unstable-2026-03-11";
-  _commit = "850a63999ca888abf46cbe5533d15c2222451898";
+  version = "0-unstable-2026-03-16";
+  _commit = "916a997a4a83d58d1628370f4a6237973db8042e";
 
   src = fetchFromSourcehut {
     owner = "~chld";
     repo = "shko";
     rev = finalAttrs._commit;
-    hash = "sha256-PZJBkckb2Sn1mwU2awDIjFnStuP7Y84MsIk4sRoAy4M=";
+    hash = "sha256-+jNlmGoKe58SKVY85UYF1s2fnMuPvE62wC+O3aAT4Gw=";
   };
 
   inherit patches;
@@ -50,10 +50,6 @@ stdenv.mkDerivation (finalAttrs: {
   ]
   ++ extraLibs;
 
-  dontUseZigBuild = true;
-  dontUseZigCheck = true;
-  dontUseZigInstall = true;
-
   configFile =
     if lib.isDerivation conf || builtins.isPath conf then
       conf
@@ -61,22 +57,6 @@ stdenv.mkDerivation (finalAttrs: {
       writeText "config.zig" (toString conf);
   postPatch = lib.optionalString (conf != null) ''
     cp ${finalAttrs.configFile} config.zig
-  '';
-
-  buildPhase = ''
-    runHook preBuild
-
-    ./build.sh make
-
-    runHook postBuild
-  '';
-
-  installPhase = ''
-    runHook preInstall
-
-    install -D -m 755 shko $out/bin/shko
-
-    runHook postInstall
   '';
 
   meta = {
