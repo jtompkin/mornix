@@ -4,7 +4,6 @@
   fetchFromSourcehut,
   writeText,
 
-  bmake,
   pkg-config,
   wayland-scanner,
 
@@ -26,20 +25,19 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "hevel";
-  version = "0-unstable-2026-03-09";
-  _commit = "f5f689cfe2d0f398ad227af1fba2d960cee000c6";
+  version = "0-unstable-2026-03-15";
+  _commit = "cce195a2176163f099ed95c9bf7020033bdbbac9";
 
   src = fetchFromSourcehut {
     owner = "~dlm";
     repo = "hevel";
     rev = finalAttrs._commit;
-    hash = "sha256-M8X+bE3EM/vpUyLIyQ0TIRAhiTR+u8UL2/niqV4gUdY=";
+    hash = "sha256-9B180ebZzOtv9eEICVpYSo558T0/UYEVELFztPzOX4o=";
   };
 
   inherit patches;
 
   nativeBuildInputs = [
-    bmake
     pkg-config
     wayland-scanner
   ];
