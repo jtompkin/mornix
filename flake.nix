@@ -146,6 +146,7 @@
           neumenu = { inherit (self.packages.${system}) neuwld neuswc; };
           neuswc = { inherit (self.packages.${system}) neuwld; };
           neuwld = { };
+          wled = { };
           nix-search-cli = { };
           plotprimes = { };
           shko = { inherit (self.packages.${system}) neuwld neuswc; };
