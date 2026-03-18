@@ -3,13 +3,14 @@
   stdenvNoCC,
   lib,
 }:
-stdenvNoCC.mkDerivation {
+stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "zimfw-completion";
-  version = "2026-01-05";
+  version = "0-unstable-2026-01-05";
+  _commit = "af1a52e700d9c3c1e2eb9b7d540dedd2a0154270";
   src = fetchFromGitHub {
     owner = "zimfw";
     repo = "completion";
-    rev = "af1a52e700d9c3c1e2eb9b7d540dedd2a0154270";
+    rev = finalAttrs._commit;
     hash = "sha256-t56EEy19djSCaPxSi6w59qog7rxzD7bbFJkYD/PQ53E=";
   };
   installPhase = ''
@@ -21,4 +22,4 @@ stdenvNoCC.mkDerivation {
     homepage = "https://github.com/zimfw/completion";
     license = lib.licenses.mit;
   };
-}
+})

@@ -4,7 +4,7 @@ mapfile -d '' update_to_head < <(find packages -type f -name package.nix -print0
 n=${#update_to_head[@]}
 for ((i = 0; i < n; i++)); do
     pkg_path="${update_to_head[i]}"
-    pkg="$(echo "${pkg_path}" | cut -d'/' -f2)"
+    pkg="$(echo "${pkg_path}" | awk -F'/' '{print $(NF-1)}')"
     read -r -N 1 -p "[$((i + 1))/${n}] Updating ${pkg}... Commit changes? (Y/n/[s]kip) " choice
     echo
     if [[ "${choice}" == s ]]; then
