@@ -132,7 +132,8 @@
       );
       packages = forAllSystems (
         system: pkgs:
-        lib.mapAttrs (getPackageDrv pkgs "") {
+        removeRecurseHint (lib.mergeAttrsList (lib.attrValues self.legacyPackages.${system}))
+        // lib.mapAttrs (getPackageDrv pkgs "") {
           bt-dualboot = { };
           clipboard-sync = { };
           freeway = { };
@@ -158,7 +159,6 @@
           wled = { };
           wsxwm = { inherit (self.packages.${system}) neuwld neuswc; };
         }
-        // removeRecurseHint (lib.mergeAttrsList (lib.attrValues self.legacyPackages.${system}))
       );
       nixosModules = nixosModules // {
         default = {

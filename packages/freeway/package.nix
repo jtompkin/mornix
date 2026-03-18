@@ -19,12 +19,6 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-dtD6n4a9i9Chc2NSX3E+HLw/sWfHgnJ9H0Z8DqRwIzY=";
   };
 
-  outputs = [
-    "out"
-    "bin"
-    "dev"
-  ];
-
   nativeBuildInputs = [
     bmake
     pkg-config
@@ -35,7 +29,6 @@ stdenv.mkDerivation (finalAttrs: {
 
   makeFlags = [
     "PREFIX=$(out)"
-    "BINDIR=$(bin)/bin"
     # install makes dangling symlinks without these
     "SERVER_SOVERSION=0"
     "CLIENT_SOVERSION=0"
@@ -46,6 +39,5 @@ stdenv.mkDerivation (finalAttrs: {
   meta = {
     description = "Simpler libwayland";
     homepage = "https://git.sr.ht/~shrub900/freeway";
-    outputsToInstall = [ "out" ];
   };
 })
