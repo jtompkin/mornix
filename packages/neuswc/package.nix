@@ -25,14 +25,14 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "neuswc";
-  version = "0-unstable-2026-03-15";
-  _commit = "bf9503ad5088c14dd175c95b7cd298e8bfe23976";
+  version = "0-unstable-2026-03-19";
+  _commit = "8a2d575859ae683ed7dc695b31c3c1dfa104242a";
 
   src = fetchFromSourcehut {
     owner = "~shrub900";
     repo = "neuswc";
     rev = finalAttrs._commit;
-    hash = "sha256-ue1z/dabHgcWXDq1ahJPrH6IxbsSDUbPtfDYWLBULWQ=";
+    hash = "sha256-MJNoodnZGys+jTHP6QMLC1xViyfskZN2473uXyd2pYQ=";
   };
 
   nativeBuildInputs = [
