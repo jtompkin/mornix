@@ -1,6 +1,6 @@
 #!/usr/bin/env nix-shell
 #!nix-shell -i bash -p nix-update
-mapfile -d '' update_to_head < <(find packages -type f -name package.nix -print0 | xargs -0 grep -Zl _commit || true)
+mapfile -d '' update_to_head < <(find packages -type f -name package.nix -print0 | xargs -0 grep -Zl 'version = ".*unstable.*"' || true)
 n=${#update_to_head[@]}
 for ((i = 0; i < n; i++)); do
     pkg_path="${update_to_head[i]}"

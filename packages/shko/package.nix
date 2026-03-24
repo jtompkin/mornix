@@ -23,14 +23,14 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "shko";
-  version = "0-unstable-2026-03-16";
-  _commit = "916a997a4a83d58d1628370f4a6237973db8042e";
+  version = "0-unstable-2026-03-22";
+  _commit = "7da098acc9a132f11716edc6cf77d069287a09f6";
 
   src = fetchFromSourcehut {
     owner = "~chld";
     repo = "shko";
     rev = finalAttrs._commit;
-    hash = "sha256-+jNlmGoKe58SKVY85UYF1s2fnMuPvE62wC+O3aAT4Gw=";
+    hash = "sha256-AbljkmXFMJNpPptj+yaPgRqzeaoHKxfPczo9/vMEkQE=";
   };
 
   inherit patches;
@@ -57,6 +57,13 @@ stdenv.mkDerivation (finalAttrs: {
       writeText "config.zig" (toString conf);
   postPatch = lib.optionalString (conf != null) ''
     cp ${finalAttrs.configFile} config.zig
+  '';
+
+  preBuild = ''
+    substituteInPlace config.zig \
+      --replace-fail 'dev/evdev/input.h' 'linux/input.h'
+    substituteInPlace shko.zig \
+      --replace-fail 'dev/evdev/input.h' 'linux/input.h'
   '';
 
   meta = {
