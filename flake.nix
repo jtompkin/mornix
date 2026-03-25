@@ -155,6 +155,7 @@
           swclock = { inherit (self.packages.${system}) neuwld; };
           swiv = { inherit (self.packages.${system}) neuwld; };
           tRNAscan-se = { inherit (self.packages.${system}) infernal; };
+          vsearch = { };
           waybar-mediaplayer = { };
           wled = { };
           wsxwm = { inherit (self.packages.${system}) neuwld neuswc; };
