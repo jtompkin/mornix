@@ -144,6 +144,7 @@
           infernal = { };
           klatka = { inherit (self.packages.${system}) neuwld neuswc; };
           mojito = { inherit (self.packages.${system}) neuwld neuswc; };
+          mothur = { inherit (self.packages.${system}) vsearch; };
           ncbi-datasets-cli = { };
           neumenu = { inherit (self.packages.${system}) neuwld neuswc; };
           neuswc = { inherit (self.packages.${system}) neuwld; };

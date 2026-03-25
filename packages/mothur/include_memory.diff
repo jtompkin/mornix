@@ -1,0 +1,12 @@
+diff --git a/source/writer.h b/source/writer.h
+index 06f4f1b0..cd1142fa 100755
+--- a/source/writer.h
++++ b/source/writer.h
+@@ -10,6 +10,7 @@
+ #define writer_h
+ 
+ #include "sharedwriter.hpp"
++#include <memory>
+ 
+ /***********************************************************************/
+ 
