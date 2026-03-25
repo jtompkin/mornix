@@ -13,16 +13,30 @@ The goal here is to utilize the module system to limit or remove the need to use
 - **Reason for inclusion**: not available in Nixpkgs
 - **Provided**: Nix package, Home Manager module
 
+### [gnubg](https://www.gnu.org/software/gnubg/): Play and analyze backgammon games and matches
+
+- **Reason for inclusion**: package in Nixpkgs does not build
+- **Provided**: Nix package
+
 ### [goclacker](https://github.com/jtompkin/goclacker): command line reverse Polish notation (RPN) calculator
 
 - **Reason for inclusion**: egotistical bias, not available in Nixpkgs
 - **Provided**: Nix package, Home Manager module, NixOS module
 
-### [edit (msedit)](https://github.com/microsoft/edit): command line editor by Microsoft
+### [infernal](http://eddylab.org/infernal): RNA secondary structure/sequence profiles for homology search and alignment
 
-- **Reason for inclusion**: learning, used to not be available in Nixpkgs
-- **Provided**: Nix package recipe
-- **REMOVED**: No longer included in flake to trim inputs; recipe still available in `package.nix`
+- **Reason for inclusion**: not available in Nixpkgs
+- **Provided**: Nix package
+
+### [mothur](https://mothur.org/): Microbial bioinformatics
+
+- **Reason for inclusion**: not available in Nixpkgs
+- **Provided**: Nix package
+
+### [ncbi-datasets-cli](https://github.com/ncbi/datasets): Easily gather data from across NCBI databases
+
+- **Reason for inclusion**: not available in Nixpkgs
+- **Provided**: Nix package (not built from source)
 
 ### [nix-search-cli](https://github.com/peterldowns/nix-search-cli): CLI for searching packages on search.nixos.org
 
@@ -39,11 +53,24 @@ The goal here is to utilize the module system to limit or remove the need to use
 - **Reason for inclusion**: not available in Nixpkgs
 - **Provided**: Nix package, Home Manager module
 
+### [tRNAscan-se](https://github.com/UCSC-LoweLab/tRNAscan-SE): Program for detection of tRNA genes
+
+- **Reason for inclusion**: not available in Nixpkgs
+- **Provided**: Nix package, Home Manager module
+
+### [vsearch](https://github.com/torognes/vsearch): Versatile tool for microbiome analysis
+
+- **Reason for inclusion**: not available in Nixpkgs
+
 ### Vim (Neovim) plugins:
 
 - **Provided for all plugins**: Nix package, Home Manager module
 - **[cmp-mini-snippets](https://github.com/abeldekat/cmp-mini-snippets)**
   - **Reason for inclusion**: not available in Nixpkgs
+
+### [wayland.fyi](https://wayland.fyi) packages:
+
+- **Provided for most packages**: Nix package
 
 ### Templates!
 
