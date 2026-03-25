@@ -16,12 +16,17 @@
   sratoolkit,
   vsearch,
 
+  # Allows make.contigs command to read .gz files
   withBoost ? true,
+  # Allows estimator.single command to find diversity estimates
   withGsl ? true,
+  # Allows biom.info command to read Biom format 2.0
   withHdf5 ? true,
   withReadline ? true,
+  # Needed for chimera.vsearch
   withVsearch ? true,
   # sratoolkit in Nixpkgs is marked as unfree, so disabled by default
+  # Needed for sra.info command
   withSratoolkit ? false,
 }:
 stdenv.mkDerivation (finalAttrs: {
@@ -78,7 +83,7 @@ stdenv.mkDerivation (finalAttrs: {
   meta = {
     description = "Microbial bioinformatics";
     homepage = "https://mothur.org/";
-    license = lib.licenses.gpl3;
+    license = lib.licenses.gpl3Plus;
     mainProgram = "mothur";
   };
 })

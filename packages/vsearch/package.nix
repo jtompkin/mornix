@@ -25,6 +25,9 @@ stdenv.mkDerivation (finalAttrs: {
   meta = {
     description = "Versatile tool for microbiome analysis";
     homepage = "https://github.com/torognes/vsearch";
-    license = lib.licenses.gpl3Plus;
+    license = [
+      lib.licenses.gpl3Plus
+      lib.licenses.bsd2
+    ];
   };
 })

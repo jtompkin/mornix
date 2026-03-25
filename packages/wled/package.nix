@@ -80,6 +80,6 @@ stdenv.mkDerivation (finalAttrs: {
   meta = {
     description = "Simple Wayland text editor with a bottom bar";
     homepage = "https://git.sr.ht/~coasteen/wlED";
-    license = lib.licenses.gpl2;
+    license = lib.licenses.gpl2Only;
   };
 })
