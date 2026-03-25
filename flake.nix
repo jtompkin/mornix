@@ -137,6 +137,7 @@
           bt-dualboot = { };
           clipboard-sync = { };
           freeway = { };
+          gnubg = { };
           goclacker = { };
           hack = { inherit (self.packages.${system}) neuwld; };
           hevel = { inherit (self.packages.${system}) neuswc neuwld; };
