@@ -7,13 +7,13 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "vsearch";
-  version = "2.30.5";
+  version = "2.30.6";
 
   src = fetchFromGitHub {
     owner = "torognes";
     repo = "vsearch";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-4ktfX8ynUc7/Xc3OVv32Q+GcmCExsYcr5IZmvpmGngU=";
+    hash = "sha256-/+HJh8pDF5pVsywYu1q0oN7fYOh1KxtLxiorTbdCMv4=";
   };
 
   enableParallelBuilding = true;
