@@ -5,13 +5,13 @@
 }:
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "zimfw-completion";
-  version = "0-unstable-2026-01-05";
-  _commit = "af1a52e700d9c3c1e2eb9b7d540dedd2a0154270";
+  version = "0-unstable-2026-03-27";
+  _commit = "8d3e0f4e6272f4d3bad659eaa13929f9dd96f123";
   src = fetchFromGitHub {
     owner = "zimfw";
     repo = "completion";
     rev = finalAttrs._commit;
-    hash = "sha256-t56EEy19djSCaPxSi6w59qog7rxzD7bbFJkYD/PQ53E=";
+    hash = "sha256-xBurErM7KMMDObN3zPwTSOvKqXl9FDZxGfxugwlX/fk=";
   };
   installPhase = ''
     install -D -t $out/share/zsh/site-functions functions/*
