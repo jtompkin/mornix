@@ -26,13 +26,13 @@
 stdenv.mkDerivation (finalAttrs: {
   pname = "neuswc";
   version = "0-unstable-2026-03-25";
-  _commit = "9c75f09d262ec03a1aa381184b4710172fb75c75";
+  _commit = "1c68d2ed35d773c86f746bd801c50f826b288f64";
 
   src = fetchFromSourcehut {
     owner = "~shrub900";
     repo = "neuswc";
     rev = finalAttrs._commit;
-    hash = "sha256-YkPcKDIIzS+NtX+NHRYzXHAss99BMS2uAbiFitWqTXE=";
+    hash = "sha256-FAjeP8BUdh/QiVp1aG9tFzYA2p/9Hbg3SnmXjBi+DWc=";
   };
 
   nativeBuildInputs = [
