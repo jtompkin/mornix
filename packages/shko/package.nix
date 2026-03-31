@@ -24,13 +24,13 @@
 stdenv.mkDerivation (finalAttrs: {
   pname = "shko";
   version = "0-unstable-2026-03-27";
-  _commit = "d64d3adc4fb95e814ca764ec2b6894d6529f77f8";
+  _commit = "32030601a0bdfb32be6082ccd288d087fd6abca8";
 
   src = fetchFromSourcehut {
     owner = "~chld";
     repo = "shko";
     rev = finalAttrs._commit;
-    hash = "sha256-otk+nx5oPkWUsB95iWmKcgjWvj4PMrLJPTLmLRC6KF4=";
+    hash = "sha256-RoNkeVRDATKWzPkDQo8v6G2dhLaouS6Bpr5G1oXDnVg=";
   };
 
   inherit patches;
