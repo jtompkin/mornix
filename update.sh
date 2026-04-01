@@ -6,11 +6,10 @@ Usage: $0 [OPTIONS]...
 
 Options:
     --commit        Always commit updates, do not prompt
-    --no-commit     Never commit updates, write mesasges to file, do not prompt
-    --stable        Target only stable packages for update,
-                        default is to target unstable
-    --no-build      Do not build packages after updating
-    --extra-args    Stop parsing arguments, pass all further arguemnts to nix-update
+    --no-commit     Never commit updates, write messages to file, do not prompt
+    --stable        Target only stable packages for update, default is to target unstable
+    --no-build      Do not build any packages
+    --              Stop parsing arguments, pass all further arguemnts to nix-update
     --help          Show this help message and exit
 EOF
     exit
@@ -40,7 +39,7 @@ while [[ $# -gt 0 ]]; do
         build_args=()
         shift
         ;;
-    --extra-args)
+    --)
         shift
         break
         ;;
@@ -49,7 +48,7 @@ while [[ $# -gt 0 ]]; do
         ;;
     *)
         echo "Bad argument: $1"
-        echo "Use --extra-args to pass args to nix-update"
+        echo "Use --help to see options"
         exit 1
         ;;
     esac
