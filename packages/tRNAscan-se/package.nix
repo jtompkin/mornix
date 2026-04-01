@@ -23,11 +23,15 @@ stdenv.mkDerivation (finalAttrs: {
     makeWrapper
   ];
 
-  buildFlags = [ "CFLAGS=-std=c17" ];
-  installFlags = [ "PREFIX=$(out)" ];
+  preConfigure = ''
+    makeFlagsArray+=(
+      CFLAGS="-O3 -std=c99"
+    )
+    substituteInPlace tRNAscan-SE.conf.src \
+      --replace-fail 'infernal_dir: {bin_dir}' 'infernal_dir: ${infernal}/bin'
+  '';
 
   postInstall = ''
-    ln -s -t $out/bin ${infernal}/bin/*
     wrapProgram $out/bin/tRNAscan-SE \
       --prefix PATH : ${lib.makeBinPath [ perl ]}
   '';
