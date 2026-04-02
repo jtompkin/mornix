@@ -152,6 +152,7 @@
           neuwld = { };
           nix-search-cli = { };
           plotprimes = { };
+          seven-kingdoms = { };
           shko = { inherit (self.packages.${system}) neuwld neuswc; };
           swall = { };
           swclock = { inherit (self.packages.${system}) neuwld; };
