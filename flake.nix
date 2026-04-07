@@ -134,7 +134,6 @@
         system: pkgs:
         removeRecurseHint (lib.mergeAttrsList (lib.attrValues self.legacyPackages.${system}))
         // lib.mapAttrs (getPackageDrv pkgs "") {
-          text-based-sokoban = { };
           bt-dualboot = { };
           clipboard-sync = { };
           freeway = { };
@@ -152,6 +151,7 @@
           neuswc = { inherit (self.packages.${system}) neuwld; };
           neuwld = { };
           nix-search-cli = { };
+          not-tetris-3 = { };
           order-of-twilight = { };
           plotprimes = { };
           seven-kingdoms = { };
@@ -160,6 +160,7 @@
           swclock = { inherit (self.packages.${system}) neuwld; };
           swiv = { inherit (self.packages.${system}) neuwld; };
           tRNAscan-se = { inherit (self.packages.${system}) infernal; };
+          text-based-sokoban = { };
           vsearch = { };
           waybar-mediaplayer = { };
           wled = { };
