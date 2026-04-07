@@ -151,6 +151,7 @@
           neuswc = { inherit (self.packages.${system}) neuwld; };
           neuwld = { };
           nix-search-cli = { };
+          order-of-twilight = { };
           plotprimes = { };
           seven-kingdoms = { };
           shko = { inherit (self.packages.${system}) neuwld neuswc; };
