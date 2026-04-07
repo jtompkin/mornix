@@ -134,6 +134,7 @@
         system: pkgs:
         removeRecurseHint (lib.mergeAttrsList (lib.attrValues self.legacyPackages.${system}))
         // lib.mapAttrs (getPackageDrv pkgs "") {
+          text-based-sokoban = { };
           bt-dualboot = { };
           clipboard-sync = { };
           freeway = { };
