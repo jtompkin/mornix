@@ -7,6 +7,17 @@
 
   libpng,
   libjpeg,
+  libtiff,
+  lcms,
+  libsquish,
+  jasper,
+
+  withJasper ? true,
+  withJpeg ? true,
+  withLcms ? true,
+  withPng ? true,
+  withSquish ? false,
+  withTiff ? false,
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "devil";
@@ -18,13 +29,22 @@ stdenv.mkDerivation (finalAttrs: {
   };
   sourceRoot = "${finalAttrs.src.name}/DevIL";
 
+  patches =
+    [ ]
+    # Stolen from Arch package: https://gitlab.archlinux.org/archlinux/packaging/packages/devil/-/tree/main?ref_type=heads
+    ++ lib.optional withJasper ./jasper.patch;
+
   enableParallelBuilding = true;
 
   nativeBuildInputs = [ cmake ];
-  buildInputs = [
-    libpng
-    libjpeg
-  ];
+  buildInputs =
+    [ ]
+    ++ lib.optional withJasper jasper
+    ++ lib.optional withJpeg libjpeg
+    ++ lib.optional withLcms lcms
+    ++ lib.optional withPng libpng
+    ++ lib.optional withSquish libsquish
+    ++ lib.optional withTiff libtiff;
 
   cmakeFlags = [ "-DCMAKE_POLICY_VERSION_MINIMUM=3.5" ];
 
