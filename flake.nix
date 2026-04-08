@@ -145,6 +145,7 @@
           hst = { inherit (self.packages.${system}) neuwld; };
           infernal = { };
           klatka = { inherit (self.packages.${system}) neuwld neuswc; };
+          love_0_7 = { inherit (self.packages.${system}) devil; };
           mojito = { inherit (self.packages.${system}) neuwld neuswc; };
           mothur = { inherit (self.packages.${system}) vsearch; };
           ncbi-datasets-cli = { };
