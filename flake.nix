@@ -136,6 +136,7 @@
         // lib.mapAttrs (getPackageDrv pkgs "") {
           bt-dualboot = { };
           clipboard-sync = { };
+          devil = { };
           freeway = { };
           gnubg = { };
           goclacker = { };
