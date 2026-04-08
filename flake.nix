@@ -153,6 +153,7 @@
           neuswc = { inherit (self.packages.${system}) neuwld; };
           neuwld = { };
           nix-search-cli = { };
+          not-tetris-2 = { inherit (self.packages.${system}) love_0_7; };
           not-tetris-3 = { };
           order-of-twilight = { };
           plotprimes = { };
