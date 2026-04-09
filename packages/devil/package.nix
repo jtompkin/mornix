@@ -5,12 +5,12 @@
 
   cmake,
 
-  libpng,
-  libjpeg,
-  libtiff,
-  lcms,
-  libsquish,
   jasper,
+  libjpeg,
+  lcms,
+  libpng,
+  libsquish,
+  libtiff,
 
   withJasper ? true,
   withJpeg ? true,
@@ -33,6 +33,11 @@ stdenv.mkDerivation (finalAttrs: {
     [ ]
     # Stolen from Arch package: https://gitlab.archlinux.org/archlinux/packaging/packages/devil/-/tree/main?ref_type=heads
     ++ lib.optional withJasper ./jasper.patch;
+
+  outputs = [
+    "out"
+    "dev"
+  ];
 
   enableParallelBuilding = true;
 
