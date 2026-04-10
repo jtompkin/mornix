@@ -164,6 +164,7 @@
           swiv = { inherit (self.packages.${system}) neuwld; };
           tRNAscan-se = { inherit (self.packages.${system}) infernal; };
           text-based-sokoban = { };
+          violetland = { };
           vsearch = { };
           waybar-mediaplayer = { };
           wled = { };
