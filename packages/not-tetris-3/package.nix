@@ -8,7 +8,7 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "not-tetris-3";
-  version = "unstable";
+  version = "0-unstable-2021-01-27";
   _commit = "438e0a565978d46e3829e906d53617ea1cc03295";
 
   src = fetchFromGitHub {

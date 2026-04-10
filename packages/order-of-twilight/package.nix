@@ -8,7 +8,7 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "order-of-twilight";
-  version = "unstable";
+  version = "1.1-unstable-2018-12-07";
   _commit = "ea936e076a88a11b8dbb2ce9aac322c993b647c7";
 
   src = fetchFromGitHub {

@@ -8,7 +8,7 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "text-based-sokoban";
-  version = "unstable";
+  version = "0-unstable-2020-05-28";
   _commit = "4f189c943fea28fdf68e69ca1b8b60c63f4fc105";
 
   src = fetchFromGitHub {

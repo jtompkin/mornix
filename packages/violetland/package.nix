@@ -16,7 +16,7 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "violetland";
-  version = "unstable";
+  version = "0.5-unstable-2022-11-05";
   _commit = "a03bd44ae591475fc7da5a31cf7383c38d1a9b18";
 
   src = fetchFromGitHub {
