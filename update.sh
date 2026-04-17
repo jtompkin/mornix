@@ -1,5 +1,7 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -i bash -p nix-update
+#! nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/9d29d5f667d7467f98efc31881e824fa586c927e.tar.gz
+#! nix-shell -i bash
+#! nix-shell -p nix-update
 help() {
     cat <<EOF
 Usage: $0 [OPTIONS]...
