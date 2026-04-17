@@ -115,6 +115,17 @@
       # Do not use nested package sets.
       legacyPackages = forAllSystems (
         system: pkgs: {
+          games = lib.recurseIntoAttrs (
+            lib.mapAttrs (getPackageDrv pkgs "games") {
+              gnubg = { };
+              not-tetris-2 = { inherit (self.packages.${system}) love_0_7; };
+              not-tetris-3 = { };
+              order-of-twilight = { };
+              seven-kingdoms = { };
+              text-based-sokoban = { };
+              violetland = { };
+            }
+          );
           vimPlugins = lib.recurseIntoAttrs (
             lib.mapAttrs (getPackageDrv pkgs "vimPlugins") {
               cmp-mini-snippets = { };
@@ -138,7 +149,6 @@
           clipboard-sync = { };
           devil = { };
           freeway = { };
-          gnubg = { };
           goclacker = { };
           hack = { inherit (self.packages.${system}) neuwld; };
           hevel = { inherit (self.packages.${system}) neuswc neuwld; };
@@ -153,18 +163,12 @@
           neuswc = { inherit (self.packages.${system}) neuwld; };
           neuwld = { };
           nix-search-cli = { };
-          not-tetris-2 = { inherit (self.packages.${system}) love_0_7; };
-          not-tetris-3 = { };
-          order-of-twilight = { };
           plotprimes = { };
-          seven-kingdoms = { };
           shko = { inherit (self.packages.${system}) neuwld neuswc; };
           swall = { };
           swclock = { inherit (self.packages.${system}) neuwld; };
           swiv = { inherit (self.packages.${system}) neuwld; };
           tRNAscan-se = { inherit (self.packages.${system}) infernal; };
-          text-based-sokoban = { };
-          violetland = { };
           vsearch = { };
           waybar-mediaplayer = { };
           wled = { };
