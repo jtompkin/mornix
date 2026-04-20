@@ -15,7 +15,7 @@ stdenv.mkDerivation (finalAttrs: {
       aarch64-linux = "linux-arm64";
       aarch64-darwin = "darwin-arm64";
     }
-    .${stdenv.hostPlatform.system};
+    .${stdenv.hostPlatform.system} or (throw "Unsupported system: ${stdenv.hostPlafrom.system}");
 
   src = fetchzip {
     url = "https://github.com/ncbi/datasets/releases/download/v${finalAttrs.version}/${finalAttrs.systemString}.cli.package.zip";

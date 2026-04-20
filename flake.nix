@@ -157,6 +157,7 @@
           infernal = { };
           jloda = { };
           klatka = { inherit (self.packages.${system}) neuwld neuswc; };
+          libzahl.stdenv = pkgs.clangStdenv;
           love_0_7 = { inherit (self.packages.${system}) devil; };
           mojito = { inherit (self.packages.${system}) neuwld neuswc; };
           mothur = { inherit (self.packages.${system}) vsearch; };
