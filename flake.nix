@@ -154,6 +154,7 @@
           hevel = { inherit (self.packages.${system}) neuswc neuwld; };
           hst = { inherit (self.packages.${system}) neuwld; };
           infernal = { };
+          jloda = { };
           klatka = { inherit (self.packages.${system}) neuwld neuswc; };
           love_0_7 = { inherit (self.packages.${system}) devil; };
           mojito = { inherit (self.packages.${system}) neuwld neuswc; };
