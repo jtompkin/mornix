@@ -147,6 +147,7 @@
         // lib.mapAttrs (getPackageDrv pkgs "") {
           bt-dualboot = { };
           clipboard-sync = { };
+          dendroscope3 = { inherit (self.packages.${system}) jloda; };
           devil = { };
           freeway = { };
           goclacker = { };

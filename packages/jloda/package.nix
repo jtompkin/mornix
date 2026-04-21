@@ -27,6 +27,7 @@ stdenv.mkDerivation (finalAttrs: {
 
     finalAttrs.jdkWithJavaFX
   ];
+  strictDeps = true;
 
   buildPhase = ''
     runHook preBuild
@@ -44,6 +45,8 @@ stdenv.mkDerivation (finalAttrs: {
     runHook preInstall
 
     install -D -m 644 jloda.jar $out/share/java/jloda.jar
+    install -D -m 644 ../jars/VectorGraphics2D-0.13.jar $out/share/java/VectorGraphics2D-0.13.jar
+    cp -R modules $out/share/java
 
     runHook postInstall
   '';

@@ -1,0 +1,54 @@
+diff --git a/src/dendroscope/commands/ShowCheckForUpdateCommand.java b/src/dendroscope/commands/ShowCheckForUpdateCommand.java
+index a95a776..89763db 100644
+--- a/src/dendroscope/commands/ShowCheckForUpdateCommand.java
++++ b/src/dendroscope/commands/ShowCheckForUpdateCommand.java
+@@ -20,11 +20,6 @@
+ package dendroscope.commands;
+ 
+ 
+-import com.install4j.api.launcher.ApplicationLauncher;
+-import com.install4j.api.update.ApplicationDisplayMode;
+-import com.install4j.api.update.UpdateChecker;
+-import com.install4j.api.update.UpdateDescriptor;
+-import com.install4j.api.update.UpdateDescriptorEntry;
+ import dendroscope.window.MultiViewer;
+ import jloda.swing.commands.CommandBase;
+ import jloda.swing.commands.ICommand;
+@@ -92,36 +87,7 @@ public class ShowCheckForUpdateCommand extends CommandBase implements ICommand {
+ 
+ 
+     public void actionPerformed(ActionEvent ev) {
+-
+-        ApplicationDisplayMode applicationDisplayMode = ProgramProperties.isUseGUI() ? ApplicationDisplayMode.GUI : ApplicationDisplayMode.CONSOLE;
+-        UpdateDescriptor updateDescriptor;
+-        try {
+-            updateDescriptor = UpdateChecker.getUpdateDescriptor("https://software-ab.cs.uni-tuebingen.de/download/dendroscope/updates.xml", applicationDisplayMode);
+-        } catch (Exception e) {
+-            Basic.caught(e);
+-            new InfoMessage(MultiViewer.getLastActiveFrame(), "Installed version is up-to-date");
+-            return;
+-        }
+-        if (updateDescriptor.getEntries().length > 0) {
+-            if (!ProgramProperties.isUseGUI()) {
+-                UpdateDescriptorEntry entry = updateDescriptor.getEntries()[0];
+-				new InfoMessage(MultiViewer.getLastActiveFrame(), "New version available: " + entry.getNewVersion()
+-																  + "\nPlease download from: https://software-ab.cs.uni-tuebingen.de/download/dendroscope", true);
+-                return;
+-            }
+-        } else {
+-            new InfoMessage(MultiViewer.getLastActiveFrame(), "Installed version is up-to-date", true);
+-            return;
+-        }
+-
+-        ApplicationLauncher.launchApplicationInProcess("1691242312", null, new ApplicationLauncher.Callback() {
+-            public void exited(int exitValue) {
+-            }
+-
+-            public void prepareShutdown() {
+-                ProgramProperties.store();
+-            }
+-        }, ApplicationLauncher.WindowMode.FRAME, null);
++        return;
+     }
+ 
+     /**
