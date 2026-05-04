@@ -157,7 +157,7 @@
           infernal = { };
           jloda = { };
           klatka = { inherit (self.packages.${system}) neuwld neuswc; };
-          libzahl.stdenv = pkgs.clangStdenv;
+          libzahl = { };
           love_0_7 = { inherit (self.packages.${system}) devil; };
           mojito = { inherit (self.packages.${system}) neuwld neuswc; };
           mothur = { inherit (self.packages.${system}) vsearch; };
@@ -166,6 +166,7 @@
           neuswc = { inherit (self.packages.${system}) neuwld; };
           neuwld = { };
           nix-search-cli = { };
+          numbig = { inherit (self.packages.${system}) libzahl; };
           plotprimes = { };
           shko = { inherit (self.packages.${system}) neuwld neuswc; };
           swall = { };
