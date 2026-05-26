@@ -79,6 +79,7 @@
           "swclock"
           "swiv"
           "tRNAscan-se"
+          "vlang"
           "waybar-mediaplayer"
           "wsxwm"
         ] (getModule "home" "")
