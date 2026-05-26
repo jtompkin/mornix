@@ -79,6 +79,7 @@
           "swclock"
           "swiv"
           "tRNAscan-se"
+          "v-analyzer"
           "vlang"
           "waybar-mediaplayer"
           "wsxwm"
@@ -174,6 +175,7 @@
           swclock = { inherit (self.packages.${system}) neuwld; };
           swiv = { inherit (self.packages.${system}) neuwld; };
           tRNAscan-se = { inherit (self.packages.${system}) infernal; };
+          v-analyzer = { };
           vlang = { };
           vsearch = { };
           waybar-mediaplayer = { };
