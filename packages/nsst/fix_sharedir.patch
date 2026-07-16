@@ -1,0 +1,31 @@
+diff --git a/Makefile.in b/Makefile.in
+index 6ef1db0..ffb086c 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -36,19 +36,19 @@ install: all
+ 	install -D nsst-open $(DESTDIR)$(BINDIR)/$(NAME)-open
+ 	install -Dm 644 docs/nsst.conf $(DESTDIR)$(SHAREDIR)/$(NAME)/nsst.conf
+ 	install -Dm 644 docs/nsst.1 $(DESTDIR)$(MANDIR)/man1/$(NAME).1
+-	install -Dm 644 docs/nsst.desktop $(DESTDIR)/usr/share/applications/$(NAME).desktop
+-	install -Dm 644 docs/nsstc.desktop $(DESTDIR)/usr/share/applications/$(NAME)c.desktop
++	install -Dm 644 docs/nsst.desktop $(DESTDIR)$(SHAREDIR)/applications/$(NAME).desktop
++	install -Dm 644 docs/nsstc.desktop $(DESTDIR)$(SHAREDIR)/applications/$(NAME)c.desktop
+ 	@ # FIXME Custom $(NAME) currently do not work, need to modify names
+ 	install -Dm 644 completion/zsh/_nsst $(DESTDIR)$(SHAREDIR)/zsh/site-functions/_nsst
+ 	install -Dm 644 completion/fish/nsst.fish $(DESTDIR)$(SHAREDIR)/fish/vendor_completions.d/nsst.fish
+-	install -Dm 644 completion/yash/nsst $(DESTDIR)/usr/share/yash/completion/nsst
+-	install -Dm 644 completion/yash/nsstc $(DESTDIR)/usr/share/yash/completion/nsstc
+-	install -Dm 644 completion/bash/nsst $(DESTDIR)/usr/share/bash-completion/completions/nsst
+-	ln -sf nsst $(DESTDIR)/usr/share/bash-completion/completions/nsstc
++	install -Dm 644 completion/yash/nsst $(DESTDIR)$(SHAREDIR)/yash/completion/nsst
++	install -Dm 644 completion/yash/nsstc $(DESTDIR)$(SHAREDIR)/yash/completion/nsstc
++	install -Dm 644 completion/bash/nsst $(DESTDIR)$(SHAREDIR)/bash-completion/completions/nsst
++	ln -sf nsst $(DESTDIR)$(SHAREDIR)/bash-completion/completions/nsstc
+ 	install -Dm 644 integration/nsst_yash_integration.sh $(DESTDIR)$(SHAREDIR)/$(NAME)/integration/nsst_yash_integration.sh
+ 	install -Dm 644 integration/nsst_fish_integration.fish $(DESTDIR)$(SHAREDIR)/$(NAME)/integration/nsst_fish_integration.fish
+ 	install -Dm 644 integration/nsst_zsh_integration.sh $(DESTDIR)$(SHAREDIR)/$(NAME)/integration/nsst_zsh_integration.sh
+-	tic -x -o $(DESTDIR)/usr/share/terminfo/ -e 'nsst,nsst-direct' nsst.info
++	tic -x -e 'nsst,nsst-direct' nsst.info
+ 
+ uninstall:
+ 	rm -rf $(DESTDIR)$(SHAREDIR)/$(NAME)

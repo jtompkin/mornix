@@ -168,6 +168,7 @@
           neuswc = { inherit (self.packages.${system}) neuwld; };
           neuwld = { };
           nix-search-cli = { };
+          nsst = { };
           numbig = { inherit (self.packages.${system}) libzahl; };
           plotprimes = { };
           shko = { inherit (self.packages.${system}) neuwld neuswc; };
