@@ -175,6 +175,7 @@
           swclock = { inherit (self.packages.${system}) neuwld; };
           swiv = { inherit (self.packages.${system}) neuwld; };
           tRNAscan-se = { inherit (self.packages.${system}) infernal; };
+          unlambda = { };
           v-analyzer = { };
           vlang = { };
           vsearch = { };
