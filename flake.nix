@@ -175,6 +175,7 @@
           swall = { };
           swclock = { inherit (self.packages.${system}) neuwld; };
           swiv = { inherit (self.packages.${system}) neuwld; };
+          tree-sitter-wren = { };
           tRNAscan-se = { inherit (self.packages.${system}) infernal; };
           unlambda = { };
           v-analyzer = { };
