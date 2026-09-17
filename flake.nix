@@ -182,6 +182,7 @@
           vsearch = { };
           waybar-mediaplayer = { };
           wled = { };
+          wren-cli = { };
           wsxwm = { inherit (self.packages.${system}) neuwld neuswc; };
         }
       );
