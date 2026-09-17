@@ -175,8 +175,8 @@
           swall = { };
           swclock = { inherit (self.packages.${system}) neuwld; };
           swiv = { inherit (self.packages.${system}) neuwld; };
-          tree-sitter-wren = { };
           tRNAscan-se = { inherit (self.packages.${system}) infernal; };
+          tree-sitter-wren = { };
           unlambda = { };
           v-analyzer = { };
           vlang = { };
@@ -184,6 +184,7 @@
           waybar-mediaplayer = { };
           wled = { };
           wren-cli = { };
+          wren-lsp = { };
           wsxwm = { inherit (self.packages.${system}) neuwld neuswc; };
         }
       );
