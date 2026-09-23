@@ -79,9 +79,11 @@
           "swclock"
           "swiv"
           "tRNAscan-se"
+          "tree-sitter-wren"
           "v-analyzer"
           "vlang"
           "waybar-mediaplayer"
+          "wren-lsp"
           "wsxwm"
         ] (getModule "home" "")
         // {
