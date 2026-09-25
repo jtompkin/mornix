@@ -19,20 +19,18 @@
   wayland-protocols,
   xwayland,
 
-  # Choices: libinput, evdev
-  inputBackend ? "libinput",
   withXWayland ? true,
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "neuswc";
-  version = "0-unstable-2026-03-28";
-  _commit = "cc19cf90d38425132157e4afae52ac0f437c45fc";
+  version = "0-unstable-2026-09-04";
+  _commit = "35d8564f9c4105df3e6f8f16ee323a55b3e027e6";
 
   src = fetchFromSourcehut {
     owner = "~shrub900";
     repo = "neuswc";
     rev = finalAttrs._commit;
-    hash = "sha256-KqyGGAq+VlaWj4jXVCudbEChJjoyiuEJb09gDRoV4lU=";
+    hash = "sha256-ZMaqyXMsYnYjZkJr475RR6w2wlaJuK+QV94SRbaL2vc=";
   };
 
   nativeBuildInputs = [
@@ -44,6 +42,7 @@ stdenv.mkDerivation (finalAttrs: {
   buildInputs = [
     fontconfig
     libdrm
+    libinput
     libxcb-wm
     libxkbcommon
     neuwld
@@ -51,17 +50,15 @@ stdenv.mkDerivation (finalAttrs: {
     wayland
     wayland-protocols
   ]
-  ++ lib.optional withXWayland xwayland
-  ++ lib.optional (inputBackend == "libinput") libinput;
+  ++ lib.optional withXWayland xwayland;
 
   mesonFlags = [
     "-Dxwayland=${if withXWayland then "enabled" else "disabled"}"
-    "-Dinput=${inputBackend}"
   ];
 
   # TODO: remove once build system does this (maybe it already can I don't fucking know meson)
   postInstall = ''
-    cp protocol/*.h $out/include 
+    cp protocol/*.h $out/include
     mkdir -p $out/share/swc
     cp ../protocol/*.xml $out/share/swc
   '';
