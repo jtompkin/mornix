@@ -1,4 +1,5 @@
 {
+  lib,
   stdenv,
   fetchFromSourcehut,
 
@@ -9,17 +10,18 @@
   wayland,
   neuwld,
   fontconfig,
+  libxkbcommon,
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "swiv";
-  version = "0-unstable-2026-02-08";
-  _commit = "53948d6838123df4bb5840e13ebd4cfc4ec92e23";
+  version = "0-unstable-2026-05-29";
+  _commit = "17ec70c4c763588bdfc824a59ce81fa38b54764b";
 
   src = fetchFromSourcehut {
-    owner = "~shrub900";
+    owner = "~pfr";
     repo = "swiv";
     rev = finalAttrs._commit;
-    hash = "sha256-z0a5b6yn6ti4oy63SpOZtbYziNOOYG0Z0Er64pvSlFw=";
+    hash = "sha256-IW8GuNAY4eJbOWIVyARROb4l4qSRndMpwzZnGaof1pU=";
   };
 
   nativeBuildInputs = [
@@ -28,6 +30,7 @@ stdenv.mkDerivation (finalAttrs: {
   ];
   buildInputs = [
     pixman
+    libxkbcommon
     wayland
     neuwld
     fontconfig
@@ -37,7 +40,8 @@ stdenv.mkDerivation (finalAttrs: {
 
   meta = {
     description = "Simple wayland image viewer";
-    homepage = "https://git.sr.ht/~shrub900/swiv";
+    license = lib.licenses.isc;
+    homepage = "https://git.sr.ht/~pfr/swiv";
     mainProgram = "swiv";
   };
 })
