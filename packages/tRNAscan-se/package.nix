@@ -4,24 +4,30 @@
   fetchFromGitHub,
   makeWrapper,
 
+  versionCheckHook,
+
   perl,
   infernal,
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "tRNAscan-se";
-  version = "2.0.12";
+  version = "2.0.13";
 
   src = fetchFromGitHub {
     owner = "UCSC-LoweLab";
     repo = "tRNAscan-SE";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-vQ17yLQPn4iZVY4jAD8W2J/CNOkP80T4NwcVyu+5CZc=";
+    hash = "sha256-AR2JBgyygxgCVcm2ZIjmFC1jHguYkC/nmP0Qtnl+3BQ=";
   };
+
+  doInstallCheck = true;
+  versionCheckProgramArg = "-h";
 
   nativeBuildInputs = [
     perl
     makeWrapper
   ];
+  nativeInstallCheckInputs = [ versionCheckHook ];
 
   preConfigure = ''
     makeFlagsArray+=(
