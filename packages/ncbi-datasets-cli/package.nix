@@ -7,7 +7,7 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "ncbi-datasets-cli";
-  version = "18.23.0";
+  version = "18.38.0";
   systemString =
     {
       x86_64-linux = "linux-amd64";
@@ -19,7 +19,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   src = fetchzip {
     url = "https://github.com/ncbi/datasets/releases/download/v${finalAttrs.version}/${finalAttrs.systemString}.cli.package.zip";
-    hash = "sha256-vaY74zxosu9JXQO0y9nzNdBRA0ONXhWvSI6YLVPWqEo=";
+    hash = "sha256-O87gISyLg7RjAFAv6njA+AMeDyhdOnUX0QvY7qs9Z7A=";
     stripRoot = false;
   };
 
