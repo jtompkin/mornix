@@ -30,7 +30,7 @@ stdenv.mkDerivation (finalAttrs: {
   installPhase = ''
     runHook preInstall
 
-    install -D -m 755 -t $out/bin datasets dataformat 
+    install -D -m 755 -t $out/bin datasets dataformat
 
     runHook postInstall
   '';
