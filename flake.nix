@@ -33,21 +33,29 @@
             lib.mkOptionDefault
               self.packages.${pkgs.stdenv.hostPlatform.system}.${pkgName};
         };
+      flattenAttrset = attrs: lib.mergeAttrsList (lib.attrValues attrs);
+
       nixosModules =
-        lib.genAttrs [
-          "freeway"
-          "goclacker"
-          "hevel"
-          "hst"
-          "mojito"
-          "neumenu"
-          "neuswc"
-          "neuwld"
-          "shko"
-          "swclock"
-          "swiv"
-          "wsxwm"
-        ] (getModule "nixos" "")
+        flattenAttrset (
+          lib.mapAttrs (pkgSet: pkgNames: lib.genAttrs pkgNames (getModule "nixos" pkgSet)) {
+            "" = [
+              "goclacker"
+            ];
+            neuwayland = [
+              "freeway"
+              "hevel"
+              "hst"
+              "mojito"
+              "neumenu"
+              "neuswc"
+              "neuwld"
+              "shko"
+              "swclock"
+              "swiv"
+              "wsxwm"
+            ];
+          }
+        )
         // {
           allPackages =
             { lib, pkgs, ... }:
@@ -60,30 +68,36 @@
             };
         };
       homeModules =
-        lib.genAttrs [
-          "bt-dualboot"
-          "clipboard-sync"
-          "freeway"
-          "goclacker"
-          "hevel"
-          "hst"
-          "mojito"
-          "neumenu"
-          "neuswc"
-          "neuwld"
-          "nix-search-cli"
-          "plotprimes"
-          "shko"
-          "swclock"
-          "swiv"
-          "tRNAscan-se"
-          "tree-sitter-wren"
-          "v-analyzer"
-          "vlang"
-          "waybar-mediaplayer"
-          "wren-lsp"
-          "wsxwm"
-        ] (getModule "home" "")
+        flattenAttrset (
+          lib.mapAttrs (pkgSet: pkgNames: lib.genAttrs pkgNames (getModule "home" pkgSet)) {
+            "" = [
+              "bt-dualboot"
+              "clipboard-sync"
+              "goclacker"
+              "nix-search-cli"
+              "plotprimes"
+              "tRNAscan-se"
+              "tree-sitter-wren"
+              "v-analyzer"
+              "vlang"
+              "waybar-mediaplayer"
+              "wren-lsp"
+            ];
+            neuwayland = [
+              "freeway"
+              "hevel"
+              "hst"
+              "mojito"
+              "neumenu"
+              "neuswc"
+              "neuwld"
+              "shko"
+              "swclock"
+              "swiv"
+              "wsxwm"
+            ];
+          }
+        )
         // {
           vimPlugins =
             { lib, pkgs, ... }:
@@ -128,6 +142,23 @@
               violetland = { };
             }
           );
+          neuwayland = lib.recurseIntoAttrs (
+            lib.mapAttrs (getPackageDrv pkgs "neuwayland") {
+              freeway = { };
+              hack = { inherit (self.packages.${system}) neuwld; };
+              hevel = { inherit (self.packages.${system}) neuswc neuwld; };
+              hst = { inherit (self.packages.${system}) neuwld; };
+              klatka = { inherit (self.packages.${system}) neuwld neuswc; };
+              mojito = { inherit (self.packages.${system}) neuwld neuswc; };
+              neumenu = { inherit (self.packages.${system}) neuwld neuswc; };
+              neuswc = { inherit (self.packages.${system}) neuwld; };
+              neuwld = { };
+              shko = { inherit (self.packages.${system}) neuwld neuswc; };
+              swclock = { inherit (self.packages.${system}) neuwld; };
+              swiv = { inherit (self.packages.${system}) neuwld; };
+              wsxwm = { inherit (self.packages.${system}) neuwld neuswc; };
+            }
+          );
           vimPlugins = lib.recurseIntoAttrs (
             lib.mapAttrs (getPackageDrv pkgs "vimPlugins") {
               cmp-mini-snippets = { };
@@ -136,9 +167,9 @@
           zshPlugins = lib.recurseIntoAttrs (
             lib.mapAttrs (getPackageDrv pkgs "zshPlugins") {
               zimfw-completion = { };
-              zimfw-termtitle = { };
               zimfw-environment = { };
               zimfw-input = { };
+              zimfw-termtitle = { };
             }
           );
         }
@@ -151,29 +182,17 @@
           clipboard-sync = { };
           dendroscope3 = { inherit (self.packages.${system}) jloda; };
           devil = { };
-          freeway = { };
           goclacker = { };
-          hack = { inherit (self.packages.${system}) neuwld; };
-          hevel = { inherit (self.packages.${system}) neuswc neuwld; };
-          hst = { inherit (self.packages.${system}) neuwld; };
           infernal = { };
           jloda = { };
-          klatka = { inherit (self.packages.${system}) neuwld neuswc; };
           libzahl = { };
           love_0_7 = { inherit (self.packages.${system}) devil; };
-          mojito = { inherit (self.packages.${system}) neuwld neuswc; };
           mothur = { inherit (self.packages.${system}) vsearch; };
           ncbi-datasets-cli = { };
-          neumenu = { inherit (self.packages.${system}) neuwld neuswc; };
-          neuswc = { inherit (self.packages.${system}) neuwld; };
-          neuwld = { };
           nix-search-cli = { };
           nsst = { };
           numbig = { inherit (self.packages.${system}) libzahl; };
           plotprimes = { };
-          shko = { inherit (self.packages.${system}) neuwld neuswc; };
-          swclock = { inherit (self.packages.${system}) neuwld; };
-          swiv = { inherit (self.packages.${system}) neuwld; };
           tRNAscan-se = { inherit (self.packages.${system}) infernal; };
           tree-sitter-wren = { };
           unlambda = { };
@@ -184,7 +203,6 @@
           wled = { };
           wren-cli = { };
           wren-lsp = { };
-          wsxwm = { inherit (self.packages.${system}) neuwld neuswc; };
         }
       );
       nixosModules = nixosModules // {
