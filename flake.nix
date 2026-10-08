@@ -44,7 +44,6 @@
           "neuswc"
           "neuwld"
           "shko"
-          "swall"
           "swclock"
           "swiv"
           "wsxwm"
@@ -75,7 +74,6 @@
           "nix-search-cli"
           "plotprimes"
           "shko"
-          "swall"
           "swclock"
           "swiv"
           "tRNAscan-se"
@@ -174,7 +172,6 @@
           numbig = { inherit (self.packages.${system}) libzahl; };
           plotprimes = { };
           shko = { inherit (self.packages.${system}) neuwld neuswc; };
-          swall = { };
           swclock = { inherit (self.packages.${system}) neuwld; };
           swiv = { inherit (self.packages.${system}) neuwld; };
           tRNAscan-se = { inherit (self.packages.${system}) infernal; };
