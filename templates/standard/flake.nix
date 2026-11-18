@@ -15,7 +15,7 @@
     {
       packages = forAllSystems (
         system: pkgs: {
-          hello = pkgs.callPackage ./package.nix { };
+          hello = pkgs.callPackage ./nix/package.nix { };
           default = self.packages.${system}.hello;
         }
       );
