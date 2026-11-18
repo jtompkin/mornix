@@ -224,6 +224,10 @@
           path = ./templates/python;
           description = "Basic Python project";
         };
+        go = {
+          path = ./templates/go;
+          description = "Basic go project";
+        };
         default = self.templates.standard;
       };
       overlays = {
